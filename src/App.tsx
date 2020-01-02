@@ -1,19 +1,16 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
-import Home from './Pages/Home';
+import Home from './pages/Home';
+import Header from './components/Header';
 
-import Header from './Components/Header';
-
-const App: React.FC<{}> = () => (
+const App: React.FC = () => (
   <>
     <Header />
     <main>
-      <BrowserRouter>
-        <Switch>
-          <Route path="/" component={Home} />
-        </Switch>
-      </BrowserRouter>
+      <Switch>
+        <Route path="/" component={Home} />
+      </Switch>
     </main>
   </>
 );

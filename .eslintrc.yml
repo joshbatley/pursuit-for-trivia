@@ -1,5 +1,6 @@
 extends:
   - airbnb-typescript
+  - plugin:import/typescript
   - "plugin:@typescript-eslint/recommended"
 parser: '@typescript-eslint/parser'
 env:
@@ -12,3 +13,6 @@ plugins:
   - react
   - react-hooks
   - '@typescript-eslint'
+rules:
+  import/extensions: 0
+  import/no-unresolved: 0
