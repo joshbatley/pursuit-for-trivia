@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'pages/node_modules/react';
+import React, { useState, useEffect } from 'react';
 import api from 'api';
 
 const Home = () => {
