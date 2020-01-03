@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import Home from './pages/Home';
+import Start from './pages/Start';
 import Header from './components/Header';
 
 const App: React.FC = () => (
@@ -9,7 +9,7 @@ const App: React.FC = () => (
     <Header />
     <main>
       <Switch>
-        <Route path="/" component={Home} />
+        <Route path="/" component={Start} />
       </Switch>
     </main>
   </>

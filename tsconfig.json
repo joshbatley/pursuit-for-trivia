@@ -10,8 +10,6 @@
     "declarationMap": true,
     "strict": true,
     "noImplicitAny": true,
-    "noFallthroughCasesInSwitch": true,
-    "noUnusedParameters": true,
     "noUnusedLocals": true,
     "forceConsistentCasingInFileNames": true,
     "lib": [
@@ -21,12 +19,12 @@
     ],
     "jsx": "react",
     "baseUrl": "src",
-    "allowJs": true,
-    "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true
+    "allowJs": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "isolatedModules": true
   },
   "include": [
     "src",

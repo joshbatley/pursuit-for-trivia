@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import GameManagerContext from 'contexts/GameManager';
+import GameManagerCtx, { GameManager } from 'contexts/GameManager';
 import config from 'config';
 
 interface Props {
@@ -10,20 +10,34 @@ const GameManagerProvider: React.FC<Props> = ({ children }: Props) => {
   const [lives, setLives] = useState(3);
   const [timer, setTimer] = useState(30);
 
-  const resetTimer = () => setTimer(config.settings.maxTimer);
-  const startTimer = () => setInterval(() => setTimer(timer - 1), 1000);
+  const resetTimer = (): void => setTimer(config.settings.maxTimer);
+  const startTimer = (): NodeJS.Timeout => setInterval(() => setTimer(timer - 1), 1000);
+  const cancelTimer = (): void => {};
 
-  const loseLife = () => setLives(lives - 1);
-  const resetLife = () => setLives(config.settings.maxLives);
+  const loseLife = (): void => setLives(lives - 1);
+  const resetLife = (): void => setLives(config.settings.maxLives);
 
-  const timerRanOut = () => { };
-  const correctAnswer = () => { };
-  const incorrectAnswer = () => { };
+  const timesUp = (): void => { };
+  const correct = (): void => { };
+  const incorrect = (): void => { };
+
+  const values: GameManager = {
+    lives,
+    timer,
+    resetTimer,
+    startTimer,
+    cancelTimer,
+    loseLife,
+    resetLife,
+    timesUp,
+    correct,
+    incorrect,
+  };
 
   return (
-    <GameManagerContext.Provider value={{ lives, timer }}>
+    <GameManagerCtx.Provider value={values}>
       {children}
-    </GameManagerContext.Provider>
+    </GameManagerCtx.Provider>
   );
 };
 

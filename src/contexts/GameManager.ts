@@ -1,13 +1,29 @@
 import React from 'react';
 
-interface GameManager {
+export interface GameManager {
   timer: number;
   lives: number;
+  resetTimer: () => void;
+  cancelTimer: () => void;
+  startTimer: () => void;
+  loseLife: () => void;
+  resetLife: () => void;
+  timesUp: () => void;
+  correct: () => void;
+  incorrect: () => void;
 }
 
-const GameManagerContext = React.createContext<GameManager>({
+const GameManagerCtx = React.createContext<GameManager>({
   timer: 0,
   lives: 0,
+  resetTimer: () => {},
+  cancelTimer: () => {},
+  startTimer: () => {},
+  loseLife: () => {},
+  resetLife: () => {},
+  timesUp: () => {},
+  correct: () => {},
+  incorrect: () => {},
 });
 
-export default GameManagerContext;
+export default GameManagerCtx;
