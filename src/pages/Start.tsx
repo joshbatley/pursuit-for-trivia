@@ -1,9 +1,7 @@
 import React from 'react';
 
 const Start: React.FC = () => (
-  <>
-    Hello
-  </>
+  <h1>START</h1>
 );
 
 export default Start;

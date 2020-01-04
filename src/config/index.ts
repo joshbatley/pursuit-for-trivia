@@ -1,14 +1,14 @@
 interface Config {
   settings: {
     maxLives: number;
-    maxTimer: number;
+    maxTime: number;
   }
 }
 
 const config: Config = {
   settings: {
     maxLives: 3,
-    maxTimer: 30
+    maxTime: 3,
   }
 };
 

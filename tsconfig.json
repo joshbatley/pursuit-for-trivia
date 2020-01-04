@@ -10,7 +10,6 @@
     "declarationMap": true,
     "strict": true,
     "noImplicitAny": true,
-    "noUnusedLocals": true,
     "forceConsistentCasingInFileNames": true,
     "lib": [
       "es6",
@@ -23,8 +22,8 @@
     "resolveJsonModule": true,
     "allowJs": true,
     "skipLibCheck": true,
-    "noEmit": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "noEmit": true
   },
   "include": [
     "src",

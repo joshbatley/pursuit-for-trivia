@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import QuestionManagerCtx, { QuestionManager } from 'contexts/QuestionManager';
+import QuestionManagerCtx, { QuestionManager } from 'contexts/QuestionManagerCtx';
 import getQuestions from 'api';
 
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
 const QuestionManagerProvider: React.FC<Props> = ({ children }: Props) => {
   const [current, setCurrent] = useState(0);
   const [question, setQuestions] = useState([] as Question[]);
-  const next = (): void => setCurrent(current + 1);
+  const nextQuestion = async (): Promise<void> => setCurrent(current + 1);
   const fetch = async (): Promise<void> => {
     try {
       const res: QuestionRes = await getQuestions();
@@ -20,16 +20,19 @@ const QuestionManagerProvider: React.FC<Props> = ({ children }: Props) => {
       console.log(err);
     }
   };
+
   const reset = (): void => {};
   const shuffle = (): void => {};
   const clear = (): void => {};
+  const revealAnswers = (): void => {};
 
   const values: QuestionManager = {
     current,
-    next,
+    nextQuestion,
     fetch,
     reset,
     questionArray: question,
+    revealAnswers,
     shuffle,
     clear,
   };
