@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import GameManagerCtx from 'contexts/GameManagerCtx';
 import useQuestionManager from 'hooks/useQuestionManager';
-import useInterval from 'hooks/useInterval';
 import config from 'config';
 
 interface Props {
@@ -9,65 +8,56 @@ interface Props {
 }
 
 const GameManagerProvider: React.FC<Props> = ({ children }: Props) => {
-  const { maxTime, maxLives } = config.settings;
-  const { nextQuestion, fetch } = useQuestionManager();
-  const [lives, setLives] = useState(3);
-  const [timer, setTimer] = useState(false as (boolean));
-  const [time, setTime] = useState(maxTime);
+  const { maxLives } = config.mode.normal;
 
-  const startGame = (): false | void => (!timer && time === maxTime) && setTimer(true);
-  const cancelTimer = (): void => setTimer(false);
+  const { nextQuestion, fetch } = useQuestionManager();
+
+  const [lives, setLives] = useState(maxLives);
+
+  // const nextQuestion = () => console.log('res');
+  const stopTimer = () => console.log('res');
+  const startTimer = () => console.log('res1');
+
+  const startGame = async (): Promise<void> => {
+    await fetch();
+    startTimer();
+  };
 
   const loseLife = (): void => setLives(lives - 1);
   const resetLife = (): void => setLives(maxLives);
 
-  const resetTimer = (): void => {
-    setTime(maxTime);
-    setTimer(true);
-  };
-
   const resetGame = (): void => {
     resetLife();
-    resetTimer();
+    startTimer();
   };
 
   const timesUp = async (): Promise<void> => {
     loseLife();
-    cancelTimer();
+    stopTimer();
     // Times up animation
     await nextQuestion(); // Reveal(correct answer), next questin
     console.log('time up');
-    resetTimer();
+    startTimer();
   };
 
   const correct = async (): Promise<void> => {
-    cancelTimer();
+    stopTimer();
     // Fire confetti
     await nextQuestion(); // Reveal(nothing), next question
-    resetTimer();
+    startTimer();
   };
 
   const incorrect = async (): Promise<void> => {
-    cancelTimer();
+    stopTimer();
     loseLife();
     // Dunce animation
     await nextQuestion(); // Reveal(correct answer), next question
-    resetTimer();
+    startTimer();
   };
 
-  useInterval(() => {
-    if (time <= 0) {
-      timesUp();
-      return;
-    }
-    setTime(time - 1);
-  }, timer ? 1000 : null);
-
   const values = {
-    lives,
-    time,
+    lives: 0,
     startGame,
-    cancelTimer,
     resetGame,
     correct,
     incorrect,

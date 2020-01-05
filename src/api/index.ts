@@ -13,7 +13,6 @@ const getQuestions = async (): Promise<Question[] | null> => {
       return e;
     }
   }
-
   return mock.results;
 };
 

@@ -1,14 +1,22 @@
-interface Config {
-  settings: {
-    maxLives: number;
-    maxTime: number;
+enum Modes {
+  Normal = 'normal'
+};
+
+export interface Config {
+  mode: {
+    [Modes.Normal]: {
+      maxLives: number;
+      maxTime: number;
+    }
   }
 }
 
 const config: Config = {
-  settings: {
-    maxLives: 3,
-    maxTime: 3,
+  mode: {
+    [Modes.Normal]: {
+      maxLives: 3,
+      maxTime: 30,
+    }
   }
 };
 

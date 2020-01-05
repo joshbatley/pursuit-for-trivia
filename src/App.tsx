@@ -2,14 +2,16 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import Start from './pages/Start';
-import Header from './components/Header';
+import ModeSelector from './pages/ModeSelector';
+import GameScene from './pages/GameScene';
 
 const App: React.FC = () => (
   <>
-    <Header />
     <main>
       <Switch>
-        <Route path="/" component={Start} />
+        <Route path="/" exact component={Start} />
+        <Route path="/mode-selector" component={ModeSelector} />
+        <Route path="/game/:mode" component={GameScene} />
       </Switch>
     </main>
   </>

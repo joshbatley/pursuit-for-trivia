@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import QuestionManagerCtx, { QuestionManager } from 'contexts/QuestionManagerCtx';
 import getQuestions from 'api';
 
@@ -10,7 +10,9 @@ const QuestionManagerProvider: React.FC<Props> = ({ children }: Props) => {
   const [current, setCurrent] = useState(0);
   const [question, setQuestions] = useState([] as Question[]);
   const nextQuestion = async (): Promise<void> => setCurrent(current + 1);
-  const fetch = async (): Promise<void> => {
+
+  const fetch = useCallback(async (): Promise<void> => {
+    console.log('fetch');
     try {
       const res: QuestionRes = await getQuestions();
       if (res) {
@@ -19,7 +21,7 @@ const QuestionManagerProvider: React.FC<Props> = ({ children }: Props) => {
     } catch (err) {
       console.log(err);
     }
-  };
+  }, []);
 
   const reset = (): void => {};
   const shuffle = (): void => {};
