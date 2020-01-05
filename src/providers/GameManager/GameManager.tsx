@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useState } from 'react';
 import GameManagerCtx from 'contexts/GameManagerCtx';
 import useQuestionManager from 'hooks/useQuestionManager';
 import config from 'config';
@@ -31,14 +31,14 @@ const GameManagerProvider: React.FC<Props> = ({ children }: Props) => {
     startTimer();
   };
 
-  const timesUp = async (): Promise<void> => {
-    loseLife();
-    stopTimer();
-    // Times up animation
-    await nextQuestion(); // Reveal(correct answer), next questin
-    console.log('time up');
-    startTimer();
-  };
+  // const timesUp = async (): Promise<void> => {
+  //   loseLife();
+  //   stopTimer();
+  //   // Times up animation
+  //   await nextQuestion(); // Reveal(correct answer), next questin
+  //   console.log('time up');
+  //   startTimer();
+  // };
 
   const correct = async (): Promise<void> => {
     stopTimer();
