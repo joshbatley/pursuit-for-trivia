@@ -1,9 +1,9 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import Start from './pages/Start';
-import ModeSelector from './pages/ModeSelector';
-import GameScene from './pages/GameScene';
+import Start from 'pages/Start';
+import ModeSelector from 'pages/ModeSelector';
+import GameScene from 'pages/GameScene';
 
 const App: React.FC = () => (
   <>
