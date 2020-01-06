@@ -19,9 +19,9 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name : Yarn install
       uses: actions/setup-node@master
-    - run: yarn install
+      run: yarn install
     - name : Yarn test
       uses: actions/setup-node@master
-    - run: yarn test
+      run: yarn test
       env:
         CI: true
