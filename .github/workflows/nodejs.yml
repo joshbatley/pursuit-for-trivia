@@ -16,7 +16,7 @@ jobs:
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
-        node-version: 13
+        node-version: ${{ matrix.node-version }}
     - name : Yarn install
       uses: actions/setup-node@v1
       with:
