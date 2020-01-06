@@ -7,6 +7,9 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    env:
+      ci: true
+
     strategy:
       matrix:
         node-version: ['12.x']
