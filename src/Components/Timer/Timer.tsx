@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import useInterval from 'hooks/useInterval';
 import config from 'config';
+import style from './style.module.css';
 
 interface Props {
   cb?: () => void;
@@ -22,7 +23,7 @@ const Timer: React.FC<Props> = ({ cb, maxTime }: Props) => {
   }, isRunning ? 1000 : null);
 
   return (
-    <span>{time}</span>
+    <span className={style.timer}>{time}</span>
   );
 };
 
