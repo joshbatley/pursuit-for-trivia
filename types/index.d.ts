@@ -3,7 +3,6 @@ declare module '*.css' {
   export default styles;
 }
 
-
 interface Question {
   category: string;
   type: string;
@@ -19,3 +18,15 @@ interface Question {
 // }
 
 type QuestionRes = Question[] | null;
+
+// Config
+enum Modes {
+  Normal = 'normal'
+}
+
+interface Settings {
+  maxLives: number;
+  maxTime: number;
+}
+
+type API = 'questionURL' | 'categoryURL' | 'tokenURL';

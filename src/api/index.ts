@@ -1,6 +1,7 @@
+import config from 'config';
 import mock from './mock.json';
 
-const url = 'https://opentdb.com/api.php?amount=10';
+const url = config.api.questionURL;
 
 const getQuestions = async (): Promise<Question[] | null> => {
   if (false) {
