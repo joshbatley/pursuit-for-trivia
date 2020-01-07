@@ -20,10 +20,6 @@ interface Question {
 type QuestionRes = Question[] | null;
 
 // Config
-enum Modes {
-  Normal = 'normal'
-}
-
 interface Settings {
   maxLives: number;
   maxTime: number;

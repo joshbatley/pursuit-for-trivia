@@ -1,3 +1,7 @@
+enum Modes {
+  Normal = 'normal'
+}
+
 export interface Config {
   api: Record<API, string>;
   mode: Record<Modes, Settings>;
