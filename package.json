@@ -9,7 +9,7 @@
     "test-coverage": "react-scripts test --coverage --watchAll=false",
     "precommit": "yarn test-coverage ",
     "commit": "npx git-cz",
-    "lint": "eslint .eslintrc.yml src/**/*.{ts,tsx} --ignore-pattern .eslintignore"
+    "lint": "eslint .eslintrc.yml src/**/*.{ts,tsx} --ignore-path .eslintignore"
   },
   "dependencies": {
     "classnames": "^2.2.6",

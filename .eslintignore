@@ -1,6 +1,7 @@
 build/
 config/
 scripts/
-registerServiceWorker.js
-preact.config.js
+ServiceWorker.ts
 setupTests.ts
+react-app-env.d.ts
+types/
