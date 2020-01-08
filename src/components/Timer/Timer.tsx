@@ -8,8 +8,8 @@ interface Props {
   maxTime?: number;
 }
 
-const Timer: React.FC<Props> = ({ cb, maxTime }: Props) => {
-  const [time, setTime] = useState(maxTime || config.mode.normal.maxTime);
+const Timer: React.FC<Props> = ({ cb, maxTime = config.mode.normal.maxTime }: Props) => {
+  const [time, setTime] = useState(maxTime);
   const [isRunning, setRunning] = useState(true);
   useInterval(() => {
     if (time <= 0) {
@@ -22,8 +22,17 @@ const Timer: React.FC<Props> = ({ cb, maxTime }: Props) => {
     setTime(time - 1);
   }, isRunning ? 1000 : null);
 
+  const setCssVariable = { ['--time' as string]: maxTime };
   return (
-    <span className={style.timer}>{time}</span>
+    <div className={style.timer} style={setCssVariable}>
+      <svg className={style.progress} width="70" height="70" viewBox="0 0 250 250">
+        <circle className={style.progress__meter} cx="125" cy="125" r="113" />
+        <circle className={style.progress__value} cx="125" cy="125" r="113" />
+      </svg>
+      <div className={style.time}>
+        {time}
+      </div>
+    </div>
   );
 };
 
