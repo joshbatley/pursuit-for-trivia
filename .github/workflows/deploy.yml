@@ -1,6 +1,6 @@
 name: deploy
 
-on: [tag]
+on: [release]
 
 jobs:
   deploy:
