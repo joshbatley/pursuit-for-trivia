@@ -6,8 +6,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      uses: netlify/actions/cli@master
-      args: deploy
-      env:
-        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: netlify/actions/cli@master
+        with:
+          args: deploy
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
