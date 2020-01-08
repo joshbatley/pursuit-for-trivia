@@ -1,0 +1,11 @@
+name: deploy
+
+on: [tag]
+
+jobs:
+  deploy:
+    uses: netlify/actions/cli@master
+    args: deploy
+    env:
+      NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
