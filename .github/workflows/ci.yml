@@ -1,9 +1,9 @@
-name: Node CI
+name: CI
 
 on: [push]
 
 jobs:
-  test:
+  test-lint-build-checks:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -14,9 +14,9 @@ jobs:
         uses: actions/setup-node@master
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Install and Test
-        run: |
-          yarn
-          yarn test
+      - run: yarn
+      - run: yarn test-coverage
+      - run: yarn lint
+      - run: yarn build
         env:
           CI: true
