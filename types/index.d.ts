@@ -12,10 +12,10 @@ interface Question {
   incorrect_answers: string[];
 }
 
-// interface QuestionsData {
-//   response_code: number;
-//   results: Question[];
-// }
+interface QuestionsData {
+  response_code: number;
+  results: Question[];
+}
 
 type QuestionRes = Question[] | null;
 
