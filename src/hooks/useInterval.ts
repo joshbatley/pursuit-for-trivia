@@ -9,9 +9,7 @@ function useInterval(callback: () => void, delay: number | null): void {
 
   useEffect((): (void | (() => void)) => {
     function tick(): void {
-      if (savedCallback.current) {
-        savedCallback.current();
-      }
+        savedCallback.current?.();
     }
 
     if (delay !== null) {

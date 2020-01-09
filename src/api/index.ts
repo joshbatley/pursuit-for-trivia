@@ -8,9 +8,9 @@ const getQuestions = async (): Promise<Question[] | null> => {
   if (false) {
     try {
       const data = await request(url, (e) => e);
-      return data && data.results;
-    } catch (e) {
-      return e;
+      return data.results;
+    } catch {
+      return null;
     }
   }
   return mock.results;

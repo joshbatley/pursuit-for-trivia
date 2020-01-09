@@ -13,9 +13,7 @@ const Timer: React.FC<Props> = ({ cb, maxTime = config.mode.normal.maxTime }: Pr
   const [isRunning, setRunning] = useState(true);
   useInterval(() => {
     if (time <= 0) {
-      if (cb) {
-        cb();
-      }
+      cb?.();
       setRunning(false);
       return;
     }

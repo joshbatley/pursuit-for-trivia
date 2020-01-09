@@ -12,6 +12,7 @@
     "lint": "eslint .eslintrc.yml src/**/*.{ts,tsx} --ignore-path .eslintignore"
   },
   "dependencies": {
+    "@xstate/react": "^0.8.1",
     "classnames": "^2.2.6",
     "normalize.css": "^8.0.1",
     "react": "^16.12.0",
@@ -19,7 +20,8 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.3.0",
     "react-spring": "^8.0.27",
-    "typescript": "~3.7.2"
+    "typescript": "~3.7.2",
+    "xstate": "^4.7.6"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^4.2.4",
