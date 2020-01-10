@@ -1,8 +1,7 @@
 import { createContext } from 'react';
 
 export interface QuestionManager {
-  current: number;
-  nextQuestion: () => Promise<void>;
+  next: () => Promise<void>;
   reset: () => void;
   fetch: () => Promise<void>;
   questionArray: Question[] | null;
@@ -12,10 +11,9 @@ export interface QuestionManager {
 }
 
 const QuestionManagerCtx = createContext<QuestionManager>({
-  current: 0,
-  nextQuestion: async () => {},
-  fetch: async () => {},
+  next: async () => {},
   reset: () => {},
+  fetch: async () => {},
   questionArray: null,
   revealAnswers: () => {},
   shuffle: () => {},

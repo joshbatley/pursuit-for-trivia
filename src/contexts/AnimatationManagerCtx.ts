@@ -1,11 +1,13 @@
 import React from 'react';
 
 export interface AnimatationManager {
-  animator: boolean;
+  animation: string | null;
+  fireAnimation: React.Dispatch<any>;
 }
 
 const AnimatationManagerCtx = React.createContext<AnimatationManager>({
-  animator: false,
+  animation: null,
+  fireAnimation: () => {},
 });
 
 export default AnimatationManagerCtx;

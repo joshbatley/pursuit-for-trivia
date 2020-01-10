@@ -9,7 +9,12 @@ interface Props {
 const QuestionManagerProvider: React.FC<Props> = ({ children }: Props) => {
   const [current, setCurrent] = useState(0);
   const [question, setQuestions] = useState([] as Question[]);
-  const nextQuestion = async (): Promise<void> => setCurrent(current + 1);
+
+  const loadQuestions = (data) => {
+
+  }
+
+  const next = async (): Promise<void> => setCurrent(current + 1);
 
   const fetch = useCallback(async (): Promise<void> => {
     console.log('fetch');
@@ -29,8 +34,7 @@ const QuestionManagerProvider: React.FC<Props> = ({ children }: Props) => {
   const revealAnswers = (): void => {};
 
   const values: QuestionManager = {
-    current,
-    nextQuestion,
+    next,
     fetch,
     reset,
     questionArray: question,

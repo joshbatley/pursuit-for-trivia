@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import GameManagerCtx from 'contexts/GameManagerCtx';
-import useQuestionManager from 'hooks/useQuestionManager';
 import config from 'config';
 
 interface Props {
@@ -9,18 +8,10 @@ interface Props {
 
 const GameManagerProvider: React.FC<Props> = ({ children }: Props) => {
   const { maxLives } = config.mode.normal;
-
-  const { nextQuestion, fetch } = useQuestionManager();
-
   const [lives, setLives] = useState(maxLives);
 
-  // const nextQuestion = () => console.log('res');
-  const stopTimer = () => console.log('res');
-  const startTimer = () => console.log('res1');
-
   const startGame = async (): Promise<void> => {
-    await fetch();
-    startTimer();
+    // fire start event stasrt
   };
 
   const loseLife = (): void => setLives(lives - 1);
@@ -28,35 +19,31 @@ const GameManagerProvider: React.FC<Props> = ({ children }: Props) => {
 
   const resetGame = (): void => {
     resetLife();
-    startTimer();
   };
 
-  // const timesUp = async (): Promise<void> => {
-  //   loseLife();
-  //   stopTimer();
-  //   // Times up animation
-  //   await nextQuestion(); // Reveal(correct answer), next questin
-  //   console.log('time up');
-  //   startTimer();
-  // };
+  const timesUp = async (): Promise<void> => {
+    loseLife();
+    // Times up animation
+    // reveal answers
+    // next question
+  };
 
   const correct = async (): Promise<void> => {
-    stopTimer();
     // Fire confetti
-    await nextQuestion(); // Reveal(nothing), next question
-    startTimer();
+    // reveal answers
+    // next question
   };
 
   const incorrect = async (): Promise<void> => {
-    stopTimer();
     loseLife();
     // Dunce animation
-    await nextQuestion(); // Reveal(correct answer), next question
-    startTimer();
+    // reveal answers
+    // next question
   };
 
   const values = {
-    lives: 0,
+    lives,
+    timesUp,
     startGame,
     resetGame,
     correct,

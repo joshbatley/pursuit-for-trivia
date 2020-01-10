@@ -8,11 +8,11 @@ interface Props {
 }
 
 const ProviderWrapper: React.FC<Props> = ({ children }: Props) => (
-  <QuestionManagerProvider>
-    <GameManagerProvider>
+  <GameManagerProvider>
+    <QuestionManagerProvider>
       {children}
-    </GameManagerProvider>
-  </QuestionManagerProvider>
+    </QuestionManagerProvider>
+  </GameManagerProvider>
 );
 
 export default ProviderWrapper;
