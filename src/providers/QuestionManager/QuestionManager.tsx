@@ -10,9 +10,9 @@ const QuestionManagerProvider: React.FC<Props> = ({ children }: Props) => {
   const [current, setCurrent] = useState(0);
   const [question, setQuestions] = useState([] as Question[]);
 
-  const loadQuestions = (data) => {
+  // const loadQuestions = (data) => {
 
-  }
+  // };
 
   const next = async (): Promise<void> => setCurrent(current + 1);
 
