@@ -2,9 +2,14 @@ import { Machine } from 'xstate';
 
 export interface GameStateScheme {
   states: {
-    start: {};
-    game: {};
-    lose: {};
+    menu: {};
+    game: {
+      states: {
+        playing: {};
+        nextQuestion: {};
+      };
+    };
+    finish: {};
   };
 }
 
@@ -12,30 +17,41 @@ export type GameEvent =
   | { type: 'START' }
   | { type: 'CORRECT' }
   | { type: 'INCORRECT' }
-  | { type: 'TIMEUP' }
-  | { type: 'START' }
-  | { type: 'LOSE' }
   | { type: 'READY' }
-  | { type: 'RESET' };
+  | { type: 'RESET' }
+  | { type: 'EXIT' }
+  | { type: 'LOSE' }
+  | { type: 'DIE' }
+  | { type: 'FINISH' };
 
-const GameMachine = Machine<unknown, GameStateScheme, GameEvent>({
+const GameMachine = Machine<null, GameStateScheme, GameEvent>({
   id: 'game',
-  initial: 'start',
+  initial: 'menu',
   states: {
-    start: { on: { START: 'playing' } },
+    menu: {
+      on: { START: 'game' },
+    },
     game: {
+      on: { FINISH: 'finish' },
+      initial: 'playing',
       states: {
         playing: {
-          CORRECT: 'nextQuestion',
-          INCORRECT: 'nextQuestion',
-          LOSE: 'lose',
+          on: {
+            CORRECT: 'nextQuestion',
+            INCORRECT: 'nextQuestion',
+          },
         },
         nextQuestion: {
           on: { READY: 'playing' },
         },
       },
     },
-    lose: { on: { RESET: 'game' } },
+    finish: {
+      on: {
+        RESET: 'game',
+        EXIT: 'menu',
+      },
+    },
   },
 });
 
