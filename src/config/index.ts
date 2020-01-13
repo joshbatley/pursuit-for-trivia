@@ -3,6 +3,7 @@ enum Modes {
 }
 
 export interface Config {
+  useMocks: boolean;
   api: Record<API, string>;
   mode: Record<Modes, Settings>;
 }
@@ -10,6 +11,7 @@ export interface Config {
 const apiBaseURL = 'https://opentdb.com/'
 
 const config: Config = {
+  useMocks: true,
   api: {
     questionURL: `${apiBaseURL}/api.php`,
     categoryURL: `${apiBaseURL}/api_category.php`,

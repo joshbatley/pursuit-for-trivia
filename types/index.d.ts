@@ -26,3 +26,13 @@ interface Settings {
 }
 
 type API = 'questionURL' | 'categoryURL' | 'tokenURL';
+
+interface categoriesData {
+  trivia_categories: Record<number, string>[];
+}
+
+interface tokenData {
+  response_code: number;
+  response_message?: string;
+  token: string;
+}
