@@ -2,6 +2,9 @@ name: CI
 
 on: [push]
 
+env:
+  CI: true
+
 jobs:
   test-lint-build-checks:
     runs-on: ubuntu-latest
@@ -18,5 +21,3 @@ jobs:
       - run: yarn test:coverage
       - run: yarn lint
       - run: yarn build
-        env:
-          CI: true
