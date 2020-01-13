@@ -9,7 +9,7 @@
     "test:coverage": "react-scripts test --coverage --watchAll=false",
     "precommit": "yarn test:coverage ",
     "commit": "npx git-cz",
-    "lint": "eslint .eslintrc.yml src/**/*.{ts,tsx} --ignore-path .eslintignore"
+    "lint": "eslint src/**/*.{ts,tsx} --ignore-path .eslintignore"
   },
   "dependencies": {
     "@xstate/react": "^0.8.1",

@@ -13,7 +13,6 @@ const GameScene: React.FC<Props> = ({ match }: Props) => {
   let { startGame } = useGameManager();
 
   startGame(params.mode);
-  console.log('Rerender');
   return (
     <>
       <Header lives={1} />

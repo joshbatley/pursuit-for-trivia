@@ -1,5 +1,4 @@
 build/
-config/
 scripts/
 ServiceWorker.ts
 setupTests.ts
