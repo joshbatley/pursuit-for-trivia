@@ -9,8 +9,8 @@ interface Props {
 }
 
 const Timer: React.FC<Props> = ({ cb, maxTime = config.mode.normal.maxTime }: Props) => {
-  const [time, setTime] = useState(maxTime);
-  const [isRunning, setRunning] = useState(true);
+  let [time, setTime] = useState(maxTime);
+  let [isRunning, setRunning] = useState(true);
   useInterval(() => {
     if (time <= 0) {
       cb?.();
@@ -20,7 +20,7 @@ const Timer: React.FC<Props> = ({ cb, maxTime = config.mode.normal.maxTime }: Pr
     setTime(time - 1);
   }, isRunning ? 1000 : null);
 
-  const setCssVariable = { ['--time' as string]: maxTime };
+  let setCssVariable = { ['--time' as string]: maxTime };
   return (
     <div className={style.timer} style={setCssVariable}>
       <svg className={style.progress} width="70" height="70" viewBox="0 0 250 250">

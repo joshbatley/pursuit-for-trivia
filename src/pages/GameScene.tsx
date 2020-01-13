@@ -9,8 +9,8 @@ interface Props {
 }
 
 const GameScene: React.FC<Props> = ({ match }: Props) => {
-  const { params } = match;
-  const { startGame } = useGameManager();
+  let { params } = match;
+  let { startGame } = useGameManager();
 
   startGame(params.mode);
   console.log('Rerender');

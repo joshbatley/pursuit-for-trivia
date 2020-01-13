@@ -1,25 +1,25 @@
 import React, { useState, useCallback } from 'react';
 import QuestionManagerCtx, { QuestionManager } from 'contexts/QuestionManagerCtx';
-import getQuestions from 'api';
+import { fetchQuestions } from 'api';
 
 interface Props {
   children: React.ReactNode | React.ReactNode[];
 }
 
 const QuestionManagerProvider: React.FC<Props> = ({ children }: Props) => {
-  const [current, setCurrent] = useState(0);
-  const [question, setQuestions] = useState([] as Question[]);
+  let [current, setCurrent] = useState(0);
+  let [question, setQuestions] = useState([] as Question[]);
 
-  // const loadQuestions = (data) => {
+  // let loadQuestions = (data) => {
 
   // };
 
-  const next = async (): Promise<void> => setCurrent(current + 1);
+  let next = async (): Promise<void> => setCurrent(current + 1);
 
-  const fetch = useCallback(async (): Promise<void> => {
+  let fetch = useCallback(async (): Promise<void> => {
     console.log('fetch');
     try {
-      const res: QuestionRes = await getQuestions();
+      let res: QuestionRes = await fetchQuestions();
       if (res) {
         setQuestions(res);
       }
@@ -28,12 +28,12 @@ const QuestionManagerProvider: React.FC<Props> = ({ children }: Props) => {
     }
   }, []);
 
-  const reset = (): void => {};
-  const shuffle = (): void => {};
-  const clear = (): void => {};
-  const revealAnswers = (): void => {};
+  let reset = (): void => {};
+  let shuffle = (): void => {};
+  let clear = (): void => {};
+  let revealAnswers = (): void => {};
 
-  const values: QuestionManager = {
+  let values: QuestionManager = {
     next,
     fetch,
     reset,

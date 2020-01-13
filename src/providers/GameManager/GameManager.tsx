@@ -7,41 +7,41 @@ interface Props {
 }
 
 const GameManagerProvider: React.FC<Props> = ({ children }: Props) => {
-  const { maxLives } = config.mode.normal;
-  const [lives, setLives] = useState(maxLives);
+  let { maxLives } = config.mode.normal;
+  let [lives, setLives] = useState(maxLives);
 
-  const startGame = async (): Promise<void> => {
+  let startGame = async (): Promise<void> => {
     // fire start event stasrt
   };
 
-  const loseLife = (): void => setLives(lives - 1);
-  const resetLife = (): void => setLives(maxLives);
+  let loseLife = (): void => setLives(lives - 1);
+  let resetLife = (): void => setLives(maxLives);
 
-  const resetGame = (): void => {
+  let resetGame = (): void => {
     resetLife();
   };
 
-  const timesUp = async (): Promise<void> => {
+  let timesUp = async (): Promise<void> => {
     loseLife();
     // Times up animation
     // reveal answers
     // next question
   };
 
-  const correct = async (): Promise<void> => {
+  let correct = async (): Promise<void> => {
     // Fire confetti
     // reveal answers
     // next question
   };
 
-  const incorrect = async (): Promise<void> => {
+  let incorrect = async (): Promise<void> => {
     loseLife();
     // Dunce animation
     // reveal answers
     // next question
   };
 
-  const values = {
+  let values = {
     lives,
     timesUp,
     startGame,

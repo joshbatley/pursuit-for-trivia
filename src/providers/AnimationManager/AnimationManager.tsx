@@ -7,7 +7,7 @@ interface Props {
 }
 
 const AnimatationManagerProvider: React.FC<Props> = ({ children }: Props) => {
-  const [animation, fireAnimation] = useState(null as string | null);
+  let [animation, fireAnimation] = useState(null as string | null);
 
   return (
     <AnimatationManagerCtx.Provider value={{ animation, fireAnimation }}>

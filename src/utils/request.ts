@@ -1,7 +1,6 @@
-
-const request = async (url: string, errCb: (err: unknown) => void): Promise<any> => {
+async function request(url: string, errCb: (err: unknown) => void): Promise<any> {
   try {
-    const res = await fetch(url);
+    let res = await fetch(url);
     if (res.status !== 200) {
       errCb(res);
     }
@@ -9,6 +8,6 @@ const request = async (url: string, errCb: (err: unknown) => void): Promise<any>
   } catch (err) {
     errCb(err);
   }
-};
+}
 
 export default request;
