@@ -1,4 +1,5 @@
 import { Machine } from 'xstate';
+import { useMachine } from '@xstate/react';
 
 export interface GameStateScheme {
   states: {
@@ -54,5 +55,7 @@ const GameMachine = Machine<null, GameStateScheme, GameEvent>({
     },
   },
 });
+
+export const useGameMachine = () => useMachine(GameMachine);
 
 export default GameMachine;
