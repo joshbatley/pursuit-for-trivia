@@ -1,3 +1,2 @@
-import GameManger from './GameManager';
+export { default } from './GameManager';
 
-export default GameManger;

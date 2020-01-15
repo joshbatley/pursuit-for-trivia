@@ -1,3 +1,1 @@
-import Animatior from './Animatior';
-
-export default Animatior;
+export { default } from './Animatior';

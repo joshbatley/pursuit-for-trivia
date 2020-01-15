@@ -1,3 +1,1 @@
-import AnimationManager from './AnimationManager';
-
-export default AnimationManager;
+export { default } from './AnimationManager';

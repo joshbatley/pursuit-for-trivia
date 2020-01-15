@@ -1,3 +1,1 @@
-import QuestionManager from './QuestionManager';
-
-export default QuestionManager;
+export { default } from './QuestionManager';
