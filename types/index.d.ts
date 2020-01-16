@@ -27,12 +27,22 @@ interface Settings {
 
 type API = 'questionURL' | 'categoryURL' | 'tokenURL';
 
-interface categoriesData {
+interface CategoriesData {
   trivia_categories: Record<number, string>[];
 }
 
-interface tokenData {
+interface TokenData {
   response_code: number;
   response_message?: string;
   token: string;
+}
+
+type QuestionType = 'boolean' | 'multiple';
+type QuestionDifficulty = 'easy' | 'medium' | 'hard';
+
+interface FetchQuestionsArgs {
+  category?: number;
+  type?: QuestionType;
+  encoding?: string;
+  difficulty?: QuestionDifficulty;
 }
