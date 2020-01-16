@@ -1,12 +1,23 @@
-import React, { useState, useCallback } from 'react';
-import QuestionManagerCtx, { QuestionManager } from 'contexts/QuestionManagerCtx';
+import React, { useState, useCallback, createContext } from 'react';
 import { fetchQuestions } from 'api';
 
 interface Props {
-  children: React.ReactNode | React.ReactNode[];
+  children?: React.ReactNode | React.ReactNode[];
 }
 
-const QuestionManagerProvider: React.FC<Props> = ({ children }: Props) => {
+export interface QuestionManager {
+  next: () => Promise<void>;
+  reset: () => void;
+  fetch: () => Promise<void>;
+  questionArray: Question[] | null;
+  revealAnswers: () => void;
+  shuffle: () => void;
+  clear: () => void;
+}
+
+export const QuestionManagerCtx = createContext<QuestionManager | void>(undefined);
+
+export const QuestionManagerProvider: React.FC<Props> = ({ children }: Props) => {
   let [current, setCurrent] = useState(0);
   let [question, setQuestions] = useState([] as Question[]);
 
@@ -19,7 +30,7 @@ const QuestionManagerProvider: React.FC<Props> = ({ children }: Props) => {
   let fetch = useCallback(async (): Promise<void> => {
     console.log('fetch');
     try {
-      let res: QuestionRes = await fetchQuestions();
+      let res: QuestionRes = await fetchQuestions({});
       if (res) {
         setQuestions(res);
       }
@@ -49,5 +60,3 @@ const QuestionManagerProvider: React.FC<Props> = ({ children }: Props) => {
     </QuestionManagerCtx.Provider>
   );
 };
-
-export default QuestionManagerProvider;

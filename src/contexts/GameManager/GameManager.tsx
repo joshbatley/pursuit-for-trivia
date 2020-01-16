@@ -1,12 +1,22 @@
-import React, { useState } from 'react';
-import GameManagerCtx from 'contexts/GameManagerCtx';
+import React, { useState, createContext } from 'react';
 import config from 'config';
 
 interface Props {
-  children: React.ReactNode | React.ReactNode[];
+  children?: React.ReactNode | React.ReactNode[];
 }
 
-const GameManagerProvider: React.FC<Props> = ({ children }: Props) => {
+export interface GameManager {
+  lives: number;
+  timesUp: () => void;
+  resetGame: () => void;
+  startGame: (mode: string) => void;
+  correct: () => Promise<void>;
+  incorrect: () => Promise<void>;
+}
+
+export const GameManagerCtx = createContext<GameManager | void>(undefined);
+
+export const GameManagerProvider: React.FC<Props> = ({ children }: Props) => {
   let { maxLives } = config.mode.normal;
   let [lives, setLives] = useState(maxLives);
 
@@ -56,5 +66,3 @@ const GameManagerProvider: React.FC<Props> = ({ children }: Props) => {
     </GameManagerCtx.Provider>
   );
 };
-
-export default GameManagerProvider;

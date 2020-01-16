@@ -1,8 +1,8 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import Component from './GameManager';
+import { AnimationManagerProvider as Component } from './AnimationManager';
 
-describe('GameManager', () => {
+describe('AnimationManager', () => {
   it('should render', () => {
     const { container } = render(<Component />);
     expect(container).not.toBeNull();

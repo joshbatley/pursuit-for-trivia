@@ -1,7 +1,8 @@
 import React from 'react';
 
-import GameManagerProvider from 'providers/GameManager';
-import QuestionManagerProvider from 'providers/QuestionManager';
+import { GameManagerProvider } from 'contexts/GameManager';
+import { QuestionManagerProvider } from 'contexts/QuestionManager';
+import { AnimationManagerProvider } from 'contexts/AnimationManager';
 
 interface Props {
   children: React.ReactNode;
@@ -10,7 +11,9 @@ interface Props {
 const ProviderWrapper: React.FC<Props> = ({ children }: Props) => (
   <GameManagerProvider>
     <QuestionManagerProvider>
-      {children}
+      <AnimationManagerProvider>
+        {children}
+      </AnimationManagerProvider>
     </QuestionManagerProvider>
   </GameManagerProvider>
 );

@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import QuestionManagerCtx, { QuestionManager } from 'contexts/QuestionManagerCtx';
+import { QuestionManagerCtx, QuestionManager } from 'contexts/QuestionManager';
 
 function useQuestionManager(): QuestionManager {
   let context = useContext(QuestionManagerCtx);
