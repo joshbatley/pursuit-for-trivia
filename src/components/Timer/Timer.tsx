@@ -11,16 +11,17 @@ interface Props {
 const Timer: React.FC<Props> = ({ cb, maxTime = config.mode.normal.maxTime }: Props) => {
   let [time, setTime] = useState(maxTime);
   let [isRunning, setRunning] = useState(true);
+
   useInterval(() => {
     if (time <= 0) {
       cb?.();
       setRunning(false);
-      return;
     }
     setTime(time - 1);
   }, isRunning ? 1000 : null);
 
   let setCssVariable = { ['--time' as string]: maxTime };
+
   return (
     <div className={style.timer} style={setCssVariable}>
       <svg className={style.progress} width="70" height="70" viewBox="0 0 250 250">

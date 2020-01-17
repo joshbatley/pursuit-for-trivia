@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactRouter from 'react-router-dom';
-import useGameManager from 'hooks/useGameManager';
+import { useGameManager } from 'contexts/GameManager';
 import Header from 'components/Header';
 
 

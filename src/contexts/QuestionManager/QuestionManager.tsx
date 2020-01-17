@@ -1,11 +1,13 @@
-import React, { useState, useCallback, createContext } from 'react';
+import React, {
+  useState, useCallback, createContext, useContext,
+} from 'react';
 import { fetchQuestions } from 'api';
 
 interface Props {
   children?: React.ReactNode | React.ReactNode[];
 }
 
-export interface QuestionManager {
+interface QuestionManager {
   next: () => Promise<void>;
   reset: () => void;
   fetch: () => Promise<void>;
@@ -15,7 +17,17 @@ export interface QuestionManager {
   clear: () => void;
 }
 
-export const QuestionManagerCtx = createContext<QuestionManager | void>(undefined);
+const QuestionManagerCtx = createContext<QuestionManager | void>(undefined);
+
+export function useQuestionManager(): QuestionManager {
+  let context = useContext(QuestionManagerCtx);
+  if (context === undefined) {
+    throw new Error('useQuestionManager must be used within a QuestionManagerProvider');
+  }
+
+  return context;
+}
+
 
 export const QuestionManagerProvider: React.FC<Props> = ({ children }: Props) => {
   let [current, setCurrent] = useState(0);
@@ -39,10 +51,10 @@ export const QuestionManagerProvider: React.FC<Props> = ({ children }: Props) =>
     }
   }, []);
 
-  let reset = (): void => {};
-  let shuffle = (): void => {};
-  let clear = (): void => {};
-  let revealAnswers = (): void => {};
+  let reset = (): void => { };
+  let shuffle = (): void => { };
+  let clear = (): void => { };
+  let revealAnswers = (): void => { };
 
   let values: QuestionManager = {
     next,

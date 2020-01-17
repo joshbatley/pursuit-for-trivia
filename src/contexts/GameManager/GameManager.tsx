@@ -1,11 +1,11 @@
-import React, { useState, createContext } from 'react';
+import React, { useState, createContext, useContext } from 'react';
 import config from 'config';
 
 interface Props {
   children?: React.ReactNode | React.ReactNode[];
 }
 
-export interface GameManager {
+interface GameManager {
   lives: number;
   timesUp: () => void;
   resetGame: () => void;
@@ -14,7 +14,16 @@ export interface GameManager {
   incorrect: () => Promise<void>;
 }
 
-export const GameManagerCtx = createContext<GameManager | void>(undefined);
+const GameManagerCtx = createContext<GameManager | void>(undefined);
+
+export function useGameManager(): GameManager {
+  let context = useContext(GameManagerCtx);
+  if (context === undefined) {
+    throw new Error('useGameManager must be used within a GameManaagerProvider');
+  }
+
+  return context;
+}
 
 export const GameManagerProvider: React.FC<Props> = ({ children }: Props) => {
   let { maxLives } = config.mode.normal;
