@@ -1,7 +1,7 @@
 async function request(url: string, errCb: (err: unknown) => void): Promise<any> {
   try {
     let res = await fetch(url);
-    if (res.status !== 200) {
+    if (!(/^2[0-9].*/.test(res.status.toString()))) {
       errCb(res);
     }
     return await res.json();
