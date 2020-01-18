@@ -8,5 +8,4 @@ const ModeSelector: React.FC = () => (
   </>
 );
 
-
 export default ModeSelector;

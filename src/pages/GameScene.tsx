@@ -3,7 +3,6 @@ import ReactRouter from 'react-router-dom';
 import { useGameManager } from 'contexts/GameManager';
 import Header from 'components/Header';
 
-
 interface Props {
   match: ReactRouter.match<{ mode: string }>;
 }
@@ -20,4 +19,5 @@ const GameScene: React.FC<Props> = ({ match }: Props) => {
     </>
   );
 };
+
 export default GameScene;

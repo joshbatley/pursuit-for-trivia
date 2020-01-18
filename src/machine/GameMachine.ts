@@ -25,7 +25,7 @@ export type GameEvent =
   | { type: 'DIE' }
   | { type: 'FINISH' };
 
-const GameMachine = Machine<null, GameStateScheme, GameEvent>({
+export const GameMachine = Machine<null, GameStateScheme, GameEvent>({
   id: 'game',
   initial: 'menu',
   states: {
@@ -56,6 +56,4 @@ const GameMachine = Machine<null, GameStateScheme, GameEvent>({
   },
 });
 
-export const useGameMachine = () => useMachine(GameMachine);
-
-export default GameMachine;
+export const useGameMachine = (options?: any) => useMachine(GameMachine, options);

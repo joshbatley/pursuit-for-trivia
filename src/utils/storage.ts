@@ -1,7 +1,6 @@
 import { isObj } from '.';
 
 type StorageType = 'local' | 'session';
-
 type StorageValue = object | string | number | void | null;
 
 interface LS {

@@ -28,7 +28,6 @@ export function useQuestionManager(): QuestionManager {
   return context;
 }
 
-
 export const QuestionManagerProvider: React.FC<Props> = ({ children }: Props) => {
   let [current, setCurrent] = useState(0);
   let [question, setQuestions] = useState([] as Question[]);
