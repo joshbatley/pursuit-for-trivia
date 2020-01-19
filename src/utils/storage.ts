@@ -8,12 +8,12 @@ interface LS {
   set: (value: StorageValue) => void | Error;
 }
 
-class GameStorage implements LS {
+class StorageAPI implements LS {
   private key: string;
   private type: StorageType;
   private storage: Storage;
 
-  constructor(key: string, type: StorageType) {
+  constructor(key: string, type: StorageType = 'local') {
     this.key = key;
     this.type = type;
     this.storage = this.setStorage();
@@ -41,27 +41,18 @@ class GameStorage implements LS {
   };
 
   get(): StorageValue | Error {
-    let data;
-    try {
-      data = this.storage.getItem(this.key);
-      return this.parse(data);
-    } catch (err) {
-      return new Error(err);
-    }
+    let data = this.storage.getItem(this.key);
+    return this.parse(data);
   }
 
   set(value: StorageValue): void | Error {
     let valueToBe;
     if (isObj(value)) {
-      try {
-        valueToBe = JSON.stringify(value);
-      } catch (err) {
-        return new Error(err);
-      }
+      valueToBe = JSON.stringify(value);
     }
 
     this.storage.setItem(this.key, valueToBe ?? value as string);
   }
 }
 
-export default GameStorage;
+export default StorageAPI;

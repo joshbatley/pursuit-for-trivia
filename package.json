@@ -17,6 +17,7 @@
     "@xstate/test": "^0.3.0",
     "canvas-confetti": "^1.0.3",
     "classnames": "^2.2.6",
+    "jest-localstorage-mock": "^2.4.0",
     "normalize.css": "^8.0.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
