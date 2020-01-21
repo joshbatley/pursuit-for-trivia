@@ -41,7 +41,7 @@ export const QuestionManagerProvider: React.FC<Props> = ({ children }: Props) =>
   let fetch = useCallback(async (): Promise<void> => {
     console.log('fetch');
     try {
-      let res: QuestionRes = await fetchQuestions({});
+      let res = await fetchQuestions({});
       if (res) {
         setQuestions(res);
       }

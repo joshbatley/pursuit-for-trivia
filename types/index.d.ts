@@ -17,7 +17,7 @@ interface QuestionsData {
   results: Question[];
 }
 
-type QuestionRes = Question[] | null;
+type QuestionRes = Question[];
 
 // Config
 interface Settings {

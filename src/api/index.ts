@@ -20,8 +20,8 @@ async function fetchQuestions({
   });
 
   try {
-    let data = await request(`${config.api.questionURL}${questString}`, (e) => e);
-    return data?.results;
+    let data = await request<QuestionsData>(`${config.api.questionURL}${questString}`, (e) => e);
+    return data?.results ?? [];
   } catch {
     return null;
   }
@@ -33,7 +33,7 @@ async function fetchCategories(): Promise<CategoriesData | null> {
   }
 
   try {
-    let data = await request(config.api.categoryURL, (e) => e);
+    let data = await request<CategoriesData>(config.api.categoryURL, (e) => e);
     return data;
   } catch {
     return null;
@@ -42,7 +42,7 @@ async function fetchCategories(): Promise<CategoriesData | null> {
 
 async function fetchToken(): Promise<TokenData | null> {
   try {
-    let data = await request(`${config.api.tokenURL}?command=request`, (e) => e);
+    let data = await request<TokenData>(`${config.api.tokenURL}?command=request`, (e) => e);
     return data;
   } catch {
     return null;
@@ -51,7 +51,7 @@ async function fetchToken(): Promise<TokenData | null> {
 
 async function resetToken(token: string): Promise<TokenData | null> {
   try {
-    let data = await request(`${config.api.tokenURL}?command=reset&token=${token}`, (e) => e);
+    let data = await request<TokenData>(`${config.api.tokenURL}?command=reset&token=${token}`, (e) => e);
     return data;
   } catch {
     return null;
