@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { EventManagerProvider } from 'contexts/EventManager';
 import { GameManagerProvider } from 'contexts/GameManager';
 import { QuestionManagerProvider } from 'contexts/QuestionManager';
 import { AnimationManagerProvider } from 'contexts/AnimationManager';
@@ -9,13 +10,15 @@ interface Props {
 }
 
 const ProviderWrapper: React.FC<Props> = ({ children }: Props) => (
-  <GameManagerProvider>
-    <QuestionManagerProvider>
-      <AnimationManagerProvider>
-        {children}
-      </AnimationManagerProvider>
-    </QuestionManagerProvider>
-  </GameManagerProvider>
+  <EventManagerProvider>
+    <GameManagerProvider>
+      <QuestionManagerProvider>
+        <AnimationManagerProvider>
+          {children}
+        </AnimationManagerProvider>
+      </QuestionManagerProvider>
+    </GameManagerProvider>
+  </EventManagerProvider>
 );
 
 export default ProviderWrapper;

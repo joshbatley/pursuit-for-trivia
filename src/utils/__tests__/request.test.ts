@@ -14,8 +14,8 @@ describe('request util', () => {
       { status: 200 },
     );
 
-    let call = await request('/test', errorCB);
-    expect(call.data).toEqual('12345');
+    let call = await request<{ data: string }>('/test', errorCB);
+    expect(call?.data).toEqual('12345');
 
     expect(fetchMock.mock.calls.length).toEqual(1);
     expect(fetchMock.mock.calls[0][0]).toEqual('/test');
