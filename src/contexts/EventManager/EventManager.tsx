@@ -1,21 +1,71 @@
-import React, { useState, createContext } from 'react';
+import React, { createContext, useReducer, useContext } from 'react';
 
 interface Props {
   children?: React.ReactNode | React.ReactNode[];
 }
 
-export interface EventManager {
-  current: string | null;
-  sendEvent: React.Dispatch<string>;
+enum AllowActions {
+  START = 'START',
+  RESET = 'RESET',
+}
+
+type Actions = { type: AllowActions };
+
+interface State {
+  current: string;
+  states: {
+    [id: string]: {
+      on: { [K in AllowActions]?: string };
+    };
+  };
+}
+
+interface EventManager {
+  state: State;
+  dispatch: React.Dispatch<Actions>;
+}
+
+const initialState: State = {
+  current: 'menu',
+  states: {
+    menu: {
+      on: {
+        [AllowActions.START]: 'game',
+      },
+    },
+    game: {
+      on: { [AllowActions.RESET]: 'menu' },
+    },
+  },
+};
+
+function eventReducer(state: State = initialState, action: Actions) {
+  switch (action.type) {
+    case 'START':
+      return { ...state, current: action.type };
+    case 'RESET':
+      return { ...state, current: '' };
+    default:
+      throw new Error();
+  }
 }
 
 export const EventManagerCtx = createContext<EventManager | void>(undefined);
 
+export function useEventManager() {
+  let context = useContext(EventManagerCtx);
+  if (context === undefined) {
+    throw new Error('useEventManager must be used within a EventManaagerProvider');
+  }
+
+  return context;
+}
+
 export const EventManagerProvider: React.FC<Props> = ({ children }: Props) => {
-  let [current, sendEvent] = useState(null as string | null);
+  let [state, dispatch] = useReducer(eventReducer, initialState);
 
   return (
-    <EventManagerCtx.Provider value={{ current, sendEvent }}>
+    <EventManagerCtx.Provider value={{ state, dispatch }}>
       {children}
     </EventManagerCtx.Provider>
   );

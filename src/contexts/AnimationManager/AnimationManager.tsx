@@ -5,7 +5,7 @@ interface Props {
   children?: React.ReactNode | React.ReactNode[];
 }
 
-export interface AnimationManager {
+interface AnimationManager {
   animation: string | null;
   fireAnimation: React.Dispatch<string>;
 }
