@@ -20,7 +20,7 @@
     "baseUrl": "src",
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
-    "allowJs": true,
+    "allowJs": false,
     "skipLibCheck": true,
     "isolatedModules": true,
     "noEmit": true
