@@ -4,7 +4,7 @@ interface Props {
   children?: React.ReactNode | React.ReactNode[];
 }
 
-enum AllowActions {
+export enum AllowActions {
   START = 'START',
   RESET = 'RESET',
 }
@@ -39,7 +39,7 @@ const initialState: State = {
   },
 };
 
-function eventReducer(state: State = initialState, action: Actions) {
+export function eventReducer(state: State = initialState, action: Actions) {
   switch (action.type) {
     case 'START':
       return { ...state, current: action.type };

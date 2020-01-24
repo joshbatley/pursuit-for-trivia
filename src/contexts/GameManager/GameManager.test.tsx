@@ -1,10 +1,15 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { GameManagerProvider as Component } from './GameManager';
+import { renderHook } from '@testing-library/react-hooks';
+import * as Game from './GameManager';
 
 describe('GameManager', () => {
-  it('should render', () => {
-    const { container } = render(<Component />);
+  test('should render', () => {
+    const { container } = render(<Game.GameManagerProvider />);
     expect(container).not.toBeNull();
+  });
+  test('useGameManager should throw error if no provider found', () => {
+    const { result } = renderHook(() => Game.useGameManager());
+    expect(result.error.message).toBe('useGameManager must be used within a GameManagerProvider');
   });
 });

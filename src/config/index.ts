@@ -9,7 +9,7 @@ export interface Config {
   mode: Record<Modes, Settings>;
 }
 
-const apiBaseURL = 'https://opentdb.com/';
+const apiBaseURL = 'https://opentdb.com';
 
 const config: Config = {
   useMocks: true,

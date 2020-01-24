@@ -19,7 +19,7 @@ const GameManagerCtx = createContext<GameManager | void>(undefined);
 export function useGameManager(): GameManager {
   let context = useContext(GameManagerCtx);
   if (context === undefined) {
-    throw new Error('useGameManager must be used within a GameManaagerProvider');
+    throw new Error('useGameManager must be used within a GameManagerProvider');
   }
 
   return context;
