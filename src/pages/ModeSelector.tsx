@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const ModeSelector: React.FC = () => (
   <>
     <h1>MODE SELECTOR</h1>
-    <Link to="/game/nomoral">nomal</Link>
+    <Link to="/game/normal">nomal</Link>
   </>
 );
 

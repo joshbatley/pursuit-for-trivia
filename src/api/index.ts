@@ -2,19 +2,12 @@ import config from 'config';
 import request from 'utils/request';
 import { parseObjToQueryStr } from 'utils';
 
-import questionMock from '__mocks__/question.json';
-import categoryMock from '__mocks__/category.json';
-
 async function fetchQuestions({
   category,
   type = 'multiple',
   encoding = 'base64',
   difficulty = 'medium',
 }: FetchQuestionsArgs): Promise<Question[] | null> {
-  if (config.useMocks) {
-    return questionMock.results;
-  }
-
   let questString = parseObjToQueryStr({
     category, type, encoding, difficulty,
   });
@@ -28,10 +21,6 @@ async function fetchQuestions({
 }
 
 async function fetchCategories(): Promise<CategoriesData | null> {
-  if (config.useMocks) {
-    return categoryMock;
-  }
-
   try {
     let data = await request<CategoriesData>(config.api.categoryURL);
     return data;

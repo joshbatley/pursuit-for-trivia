@@ -42,9 +42,9 @@ const initialState: State = {
 export function eventReducer(state: State = initialState, action: Actions) {
   switch (action.type) {
     case 'START':
-      return { ...state, current: action.type };
+      return { ...state, current: 'game' };
     case 'RESET':
-      return { ...state, current: '' };
+      return { ...state, current: 'menu' };
     default:
       throw new Error();
   }
