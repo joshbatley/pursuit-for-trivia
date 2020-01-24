@@ -1,0 +1,24 @@
+.transition {
+  opacity: 0;
+  display: none;
+  transition: opacity 500ms ease-in;
+  height: 100%;
+}
+
+.entering {
+  display: block;
+}
+
+.entered {
+  opacity: 1;
+  display: block;
+}
+
+.exiting {
+  opacity: 0;
+}
+
+.exited {
+  display: none;
+}
+
