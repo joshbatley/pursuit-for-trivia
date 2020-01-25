@@ -8,5 +8,4 @@ const Start: React.FC = () => (
   </>
 );
 
-
 export default Start;

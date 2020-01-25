@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { EventManagerProvider } from 'contexts/EventManager';
 import { GameManagerProvider } from 'contexts/GameManager';
 import { QuestionManagerProvider } from 'contexts/QuestionManager';
