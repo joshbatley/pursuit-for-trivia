@@ -7,6 +7,11 @@ interface Props {
 export enum AllowActions {
   START = 'START',
   RESET = 'RESET',
+  QUIT = 'QUIT',
+  CORRECT = 'CORRECT',
+  INCORRECT = 'INCORRECT',
+  TIMESUP = 'TIMESUP',
+  LOSE = 'LOSE'
 }
 
 type Actions = { type: AllowActions };
