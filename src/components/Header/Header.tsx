@@ -1,5 +1,6 @@
 import React from 'react';
 import Timer from 'components/Timer';
+import Lives from 'components/Lives';
 import style from './styles.module.css';
 
 interface Props {
@@ -9,7 +10,7 @@ interface Props {
 
 const Header: React.FC<Props> = ({ lives, timeUp }: Props) => (
   <header>
-    <span>Lives: {lives}</span>
+    <Lives lives={lives} />
     <div className={style.header}>
       <Timer cb={timeUp} />
     </div>

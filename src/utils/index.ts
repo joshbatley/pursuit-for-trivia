@@ -36,4 +36,6 @@ export function parseObjToQueryStr(args: unknown): string {
   return `?${query}`;
 }
 
-export default parseObjToQueryStr;
+export function EmptyArrayOfSize(size: number) {
+  return new Array(size).fill(undefined);
+}

@@ -144,4 +144,12 @@ describe('Utils ', () => {
       expect(Utils.parseObjToQueryStr(obj)).toEqual(qs);
     });
   });
+
+  describe('EmptyArrayOfSize()', () => {
+    test('to return array of size of inputted', () => {
+      expect(Utils.EmptyArrayOfSize(0)).toHaveLength(0);
+      expect(Utils.EmptyArrayOfSize(3)).toHaveLength(3);
+      expect(Utils.EmptyArrayOfSize(5)).toHaveLength(5);
+    });
+  });
 });

@@ -20,6 +20,7 @@ rules:
   import/extensions: 0
   import/no-unresolved: 0
   react/jsx-one-expression-per-line: 0
+  react/no-array-index-key: 0
   react-hooks/rules-of-hooks: 2
   react-hooks/exhaustive-deps: 1
   import/prefer-default-export: 0
