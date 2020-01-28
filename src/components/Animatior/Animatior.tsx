@@ -26,7 +26,7 @@ const rightCannon = {
 
 const Animatior: React.FC<Props> = ({ event }: Props) => {
   let canvasRef = useRef<HTMLCanvasElement>(null);
-  let conf = useRef<(option: confetti.Options) => (Promise<null> | null)>();
+  let conf = useRef<confetti.CreateTypes>();
 
   useEffect(() => {
     if (canvasRef.current) {
