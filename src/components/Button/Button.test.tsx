@@ -4,7 +4,7 @@ import Component from './Button';
 
 describe('Button component', () => {
   test('should render and', async () => {
-    const { getByText } = render(<Component />);
+    const { getByText } = render(<Component>button</Component>);
     expect(getByText('button')).toBeInTheDocument();
   });
 });
