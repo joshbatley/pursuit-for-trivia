@@ -7,14 +7,14 @@
   --pinkLO: hsla(333, 70%, 53%, 0.2);
   --pinkOffset: hsla(304, 79%, 57%, 0.3);
   --blue: hsl(187, 52%, 60%);
-  --purple: hsl(265, 79%, 13%);
+  --black:hsl(250, 47%, 7%);
   --white: hsl(55, 92%, 95%);
 
   /* Setting */
   --text-color: var(--pink);
   --link-color: var(--blue);
   --link-hover: var(--white);
-  --background: var(--purple);
+  --background: var(--black);
   --glow-shadow: 0px 0px 3px 3px var(--pinkOffset), 2px 5px 10px 7px var(--pinkLO);
 
   --border-radius: 5px;
@@ -23,7 +23,7 @@
 body {
   font-size: 16px;
   background: var(--background);
-  background-image: url('assets/background.png');
+  background-image: url('assets/Background.svg');
   background-repeat: no-repeat;
   background-size: cover;
   color: var(--text-color);

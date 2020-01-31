@@ -37,5 +37,5 @@ export function parseObjToQueryStr(args: unknown): string {
 }
 
 export function EmptyArrayOfSize(size: number) {
-  return new Array(size).fill(undefined);
+  return Array.from(Array(size));
 }
