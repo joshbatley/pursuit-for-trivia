@@ -1,7 +1,7 @@
-import { isObj } from '.';
+import { isObj, isArray } from '.';
 
 type StorageType = 'local' | 'session';
-type StorageValue = object | string | number | void | null;
+type StorageValue = object | string | number | void | null | Record<any, any>;
 
 interface LS {
   get: () => StorageValue | Error;
@@ -47,7 +47,7 @@ class StorageAPI implements LS {
 
   set(value: StorageValue): void | Error {
     let valueToBe;
-    if (isObj(value)) {
+    if (isObj(value) || isArray(value)) {
       valueToBe = JSON.stringify(value);
     }
 

@@ -5,15 +5,22 @@ enum Modes {
 export interface Config {
   useMocks: boolean;
   sentry: string;
+  lsKeys: Record<string, string>;
   api: Record<API, string>;
   mode: Record<Modes, Settings>;
 }
 
 const apiBaseURL = 'https://opentdb.com';
+const localStorageKey = 'PFT.';
 
 const config: Config = {
   useMocks: true,
   sentry: process.env.REACT_APP_SENTRY || '',
+  lsKeys: {
+    categories: `${localStorageKey}categories`,
+    questions: `${localStorageKey}questions`,
+    save: `${localStorageKey}save`,
+  },
   api: {
     questionURL: `${apiBaseURL}/api.php`,
     categoryURL: `${apiBaseURL}/api_category.php`,

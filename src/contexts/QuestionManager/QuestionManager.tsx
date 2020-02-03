@@ -30,7 +30,7 @@ export function useQuestionManager(): QuestionManager {
 
 export const QuestionManagerProvider: React.FC<Props> = ({ children }: Props) => {
   let [current, setCurrent] = useState(0);
-  let [question, setQuestions] = useState([] as Question[]);
+  let [question, setQuestions] = useState<Question[]>([]);
 
   // let loadQuestions = (data) => {
 

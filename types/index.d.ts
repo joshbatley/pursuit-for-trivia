@@ -27,8 +27,10 @@ interface Settings {
 
 type API = 'questionURL' | 'categoryURL' | 'tokenURL';
 
+type CategoriesArray = { id: number; name: string; }[]
+
 interface CategoriesData {
-  trivia_categories: { id: number; name: string; }[];
+  trivia_categories: CategoriesArray;
 }
 
 interface TokenData {

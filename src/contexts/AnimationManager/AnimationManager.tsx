@@ -13,7 +13,7 @@ interface AnimationManager {
 export const AnimationManagerCtx = createContext<AnimationManager | void>(undefined);
 
 export const AnimationManagerProvider: React.FC<Props> = ({ children }: Props) => {
-  let [animation, fireAnimation] = useState(null as string | null);
+  let [animation, fireAnimation] = useState<string | null>(null);
 
   return (
     <AnimationManagerCtx.Provider value={{ animation, fireAnimation }}>

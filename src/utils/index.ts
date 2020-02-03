@@ -10,6 +10,10 @@ export function isEmptyString(arg: unknown): boolean {
   return typeof arg === 'string' && arg.length <= 0;
 }
 
+export function isArray(arg: unknown): boolean {
+  return arg instanceof Array;
+}
+
 export function isEmptyArray(arg: unknown): boolean {
   return arg instanceof Array && arg.length <= 0;
 }

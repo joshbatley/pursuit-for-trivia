@@ -1,24 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { ChangeEvent } from 'react';
 import { Link } from 'react-router-dom';
-import { fetchCategories } from 'api';
+import { useCategoryManager } from 'contexts/CategoryManager';
 
 const ModeSelector: React.FC = () => {
-  const [categories, setCategories] = useState<{ id: number; name: string }[]>([]);
+  const { categories, setCategory } = useCategoryManager();
 
-  useEffect(() => {
-    async function fetch() {
-      let data = await fetchCategories();
-      setCategories(data?.trivia_categories ?? []);
-    }
-    fetch();
-  }, [categories]);
+  function onChange({ target }: ChangeEvent<HTMLSelectElement>) {
+    setCategory(parseInt(target.value, 10));
+  }
 
   return (
     <>
       <h1>MODE SELECTOR</h1>
-      <select>
-        {categories && categories.map(({ id, name }) => (
-          <option key={id}>{name}</option>
+      <select onChange={onChange}>
+        {categories?.map(({ id, name }) => (
+          <option key={id} value={id}>{name}</option>
         ))}
       </select>
       <Link to="/game/normal">nomal</Link>
