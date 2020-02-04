@@ -1,22 +1,20 @@
-import React, { ChangeEvent } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { useCategoryManager } from 'contexts/CategoryManager';
+import Dropdown from 'components/Dropdown';
 
 const ModeSelector: React.FC = () => {
   const { categories, setCategory } = useCategoryManager();
 
-  function onChange({ target }: ChangeEvent<HTMLSelectElement>) {
-    setCategory(parseInt(target.value, 10));
+  function onChange(value: string) {
+    console.log(value);
+    setCategory(parseInt(value, 10));
   }
 
   return (
     <>
       <h1>MODE SELECTOR</h1>
-      <select onChange={onChange}>
-        {categories?.map(({ id, name }) => (
-          <option key={id} value={id}>{name}</option>
-        ))}
-      </select>
+      <Dropdown options={categories} onChange={onChange} placeholder="select category" />
       <Link to="/game/normal">nomal</Link>
     </>
   );

@@ -34,4 +34,6 @@ const config: Config = {
   },
 };
 
+export const isDev = process.env.NODE_ENV === 'development';
+
 export default config;
