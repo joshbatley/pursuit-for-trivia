@@ -1,7 +1,20 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render as testRender } from '@testing-library/react';
 import { renderHook } from '@testing-library/react-hooks';
+import { EventManagerProvider } from 'contexts/EventManager';
+import { CategoryManagerProvider } from 'contexts/CategoryManager';
 import * as Question from './QuestionManager';
+
+function render(children: React.ReactNode | React.ReactNode[]) {
+  return testRender(
+    <EventManagerProvider>
+      <CategoryManagerProvider>
+        {children}
+      </CategoryManagerProvider>
+    </EventManagerProvider>,
+  );
+}
+
 
 describe('QuestionManager', () => {
   test('should render', () => {

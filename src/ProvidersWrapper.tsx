@@ -12,13 +12,13 @@ interface Props {
 const ProviderWrapper: React.FC<Props> = ({ children }: Props) => (
   <EventManagerProvider>
     <GameManagerProvider>
-      <QuestionManagerProvider>
-        <CategoryManagerProvider>
+      <CategoryManagerProvider>
+        <QuestionManagerProvider>
           <AnimationManagerProvider>
             {children}
           </AnimationManagerProvider>
-        </CategoryManagerProvider>
-      </QuestionManagerProvider>
+        </QuestionManagerProvider>
+      </CategoryManagerProvider>
     </GameManagerProvider>
   </EventManagerProvider>
 );

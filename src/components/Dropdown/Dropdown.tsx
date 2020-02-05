@@ -2,7 +2,7 @@ import React from 'react';
 import style from './styles.module.css';
 
 interface Props {
-  options?: Record<string, any>[] | null;
+  options?: Record<string, string | number>[] | null;
   placeholder?: string;
   onChange?: (v: string) => void;
 }

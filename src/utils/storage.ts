@@ -1,7 +1,8 @@
 import { isObj, isArray } from '.';
 
 type StorageType = 'local' | 'session';
-type StorageValue = object | string | number | void | null | Record<any, any>;
+type StorageValue =
+  object | string | number | void | null | Record<string, string | number | boolean>;
 
 interface LS {
   get: () => StorageValue | Error;

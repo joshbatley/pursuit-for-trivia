@@ -15,8 +15,8 @@ async function fetchQuestions({
   try {
     let data = await request<QuestionsData>(`${config.api.questionURL}${questString}`);
     return data?.results ?? [];
-  } catch {
-    return null;
+  } catch (err) {
+    throw new Error(err);
   }
 }
 

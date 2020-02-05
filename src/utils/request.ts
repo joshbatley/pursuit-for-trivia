@@ -6,9 +6,8 @@ async function request<T>(url: string, errCb?: (err: unknown) => void): Promise<
     }
     return await res.json();
   } catch (err) {
-    errCb?.(err);
+    return Promise.reject(err);
   }
-  return null;
 }
 
 export default request;

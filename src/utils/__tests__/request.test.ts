@@ -22,12 +22,11 @@ describe('request util', () => {
     expect(errorCB).toHaveBeenCalledTimes(0);
   });
 
-  test('call error callback if fetch fails', async () => {
-    fetchMock.mockRejectOnce();
-    await request('/test', errorCB);
-    expect(fetchMock.mock.calls.length).toEqual(1);
-    expect(fetchMock.mock.calls[0][0]).toEqual('/test');
-    expect(errorCB).toHaveBeenCalledTimes(1);
+  test('throws error fetch fails', async () => {
+    fetchMock.mockRejectOnce(() => Promise.reject(new Error('testing')));
+    request('/test', errorCB).catch((err) => {
+      expect(err).toEqual(new Error('testing'));
+    });
   });
 
   test('call error callback if status is not 2XX', async () => {

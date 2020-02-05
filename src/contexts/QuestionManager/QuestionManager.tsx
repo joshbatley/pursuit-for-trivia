@@ -1,7 +1,9 @@
 import React, {
-  useState, useCallback, createContext, useContext,
+  useState, useCallback, createContext, useContext, useEffect,
 } from 'react';
 import { fetchQuestions } from 'api';
+import { useCategoryManager } from 'contexts/CategoryManager';
+import { useEventManager } from 'contexts/EventManager';
 
 interface Props {
   children?: React.ReactNode | React.ReactNode[];
@@ -30,25 +32,34 @@ export function useQuestionManager(): QuestionManager {
 
 export const QuestionManagerProvider: React.FC<Props> = ({ children }: Props) => {
   let [current, setCurrent] = useState(0);
-  let [question, setQuestions] = useState<Question[]>([]);
-
-  // let loadQuestions = (data) => {
-
-  // };
-
-  let next = async (): Promise<void> => setCurrent(current + 1);
+  let [question, setQuestions] = useState<Question[] | null>([]);
+  let { selected } = useCategoryManager();
+  let { state } = useEventManager();
 
   let fetch = useCallback(async (): Promise<void> => {
-    console.log('fetch');
+    if (question == null || question.length > 0) {
+      return;
+    }
     try {
-      let res = await fetchQuestions({});
+      let res = await fetchQuestions({ category: selected });
       if (res) {
         setQuestions(res);
       }
     } catch (err) {
-      console.log(err);
+      setQuestions(null);
     }
-  }, []);
+  }, [selected, question]);
+
+  useEffect(() => {
+    switch (state.current) {
+      case 'game':
+        fetch();
+        break;
+      default:
+        break;
+    }
+  });
+  let next = async (): Promise<void> => setCurrent(current + 1);
 
   let reset = (): void => { };
   let shuffle = (): void => { };
