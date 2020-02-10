@@ -1,7 +1,7 @@
 @keyframes tick {
   0% {
-    transform: scale(1.1);
-    text-shadow: 0 0px 8px rgb(46, 12, 90);
+    /* transform: scale(1.1); */
+    text-shadow: 0 0px 8px var(--pink);
   }
   40% {
     text-shadow: none;
@@ -12,43 +12,49 @@
   from {
     stroke-dashoffset: 0;
   }
+  97% {
+    stroke-linecap: round;
+  }
   to {
-    stroke-dashoffset: -709.999;
+    stroke-dashoffset: -354.999;
+    stroke-linecap: butt;
   }
 }
 
-.timer {
+.container {
   position: relative;
   border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  line-height: 50px;
 }
 
 .time {
   font-size: 20px;
   color: #fff;
   font-weight: bold;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin: -15px 0 0 -12px;
   text-align: center;
   width: 25px;
   animation: tick 1s ease-in var(--time);
 }
 
-.progress {
-  transform: rotate(-90deg);
+.timer {
+  transform: rotate(0deg);
   stroke-width: 12px;
+  position: absolute;
+  z-index: -10;
 }
 
-.progress__meter {
-  fill: rgba(255, 255, 255, 0.3);
+.timer__background {
+  fill:  var(--pink-offset);
 }
 
-.progress__value {
+.timer__left {
   fill: none;
   /* 2 * PIE * R = Array */
-  stroke-dasharray: 709.999;
+  stroke-dasharray: 354.999;
+  /* stroke-dasharray: 709.999; */
   animation: progress calc(var(--time) * 1s) linear forwards;
-  stroke: rgba(255, 252, 255, 1);
+  stroke: var(--pink);
   stroke-linecap: round;
 }

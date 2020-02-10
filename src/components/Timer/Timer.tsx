@@ -16,6 +16,7 @@ const Timer: React.FC<Props> = ({ cb, maxTime = config.mode.normal.maxTime }: Pr
     if (time <= 0) {
       cb?.();
       setRunning(false);
+      return;
     }
     setTime(time - 1);
   }, isRunning ? 1000 : null);
@@ -23,10 +24,10 @@ const Timer: React.FC<Props> = ({ cb, maxTime = config.mode.normal.maxTime }: Pr
   let setCssVariable = { ['--time' as string]: maxTime };
 
   return (
-    <div className={style.timer} style={setCssVariable}>
-      <svg className={style.progress} width="70" height="70" viewBox="0 0 250 250">
-        <circle className={style.progress__meter} cx="125" cy="125" r="113" />
-        <circle className={style.progress__value} cx="125" cy="125" r="113" />
+    <div className={style.container} style={setCssVariable}>
+      <svg className={style.timer} width="150" height="75" viewBox="0 150 250 75">
+        <circle className={style.timer__background} cx="125" cy="125" r="113" />
+        <circle className={style.timer__left} cx="125" cy="125" r="113" />
       </svg>
       <div className={style.time}>
         {time}

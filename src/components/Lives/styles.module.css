@@ -1,3 +1,13 @@
 .counter {
   color: #fff;
 }
+
+.conatiner {
+  justify-content: space-evenly;
+  align-items: center;
+  display: flex;
+}
+
+.heart {
+
+}

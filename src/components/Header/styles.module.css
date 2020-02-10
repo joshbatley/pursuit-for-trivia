@@ -1,5 +1,14 @@
 .header {
   display: flex;
-  padding: 10px 0;
+  padding: 0;
   justify-content: space-evenly;
+  background: var(--white);
+  z-index: -20;
+  position: relative;
+  height: 50px;
+  /* box-shadow: var(--hover-shadow); */
+}
+
+.header > div {
+  flex: 1 0 33%;
 }

@@ -25,6 +25,6 @@ beforeEach(() => {
 describe('Page ModeSelector', () => {
   test('should render and', async () => {
     const { getByText } = render(<Component />);
-    expect(getByText(/mode selector/i)).toBeInTheDocument();
+    expect(getByText(/set up/i)).toBeInTheDocument();
   });
 });

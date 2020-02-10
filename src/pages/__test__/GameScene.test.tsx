@@ -24,6 +24,6 @@ describe('Page GameScene', () => {
       url: '/',
     };
     const { getByText } = render(<Component match={match} />);
-    expect(getByText(/game screen/i)).toBeInTheDocument();
+    expect(getByText(/30/i)).toBeInTheDocument();
   });
 });

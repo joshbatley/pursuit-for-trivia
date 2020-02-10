@@ -1,29 +1,30 @@
 import React from 'react';
 import { EmptyArrayOfSize } from 'utils';
+import { ReactComponent as Heart } from 'assets/heart.svg';
 import style from './styles.module.css';
 
 interface Props {
   lives: number;
 }
 
-const Heart = () => (
-  <div>[]</div>
+const HeartContainer = () => (
+  <Heart width="32" height="32" className={style.heart} />
 );
 
 const LivesContainer: React.FC<Props> = ({ lives }: Props) => {
   let groupLives = lives > 3;
 
   return groupLives ? (
-    <>
+    <div className={style.conatiner}>
       <h3 className={style.counter}>{lives}</h3>
-      <Heart />
-    </>
+      <HeartContainer />
+    </div>
   ) : (
-    <>
+    <div className={style.conatiner}>
       {EmptyArrayOfSize(lives).map((o, i) => (
-        <Heart key={i} />
+        <HeartContainer key={i} />
       ))}
-    </>
+    </div>
   );
 };
 
