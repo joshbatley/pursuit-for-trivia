@@ -1,17 +1,22 @@
 .box {
-  padding: 10px;
-  border-radius: var(--border-radius);
+  border-radius: var(--round-radius);
+  color:var(--dark-blue);
+  background: var(--blue);
   text-align: center;
-  color:var(--white);
-  background: linear-gradient(180deg, rgba(219,51,127,1) 0%, rgba(230,63,204,1) 100%);
-  margin: 10px 16px;
+  padding: 10px;
+  margin: 10px auto;
   flex: 1 1 100%;
-  box-shadow:var(--glow-shadow);
   cursor: pointer;
   font-weight: bold;
-  width: calc(100% - 32px);
+  width: 60%;
   display: flex;
   justify-content: center;
   align-items: center;
   border:none;
+}
+
+.box:disabled {
+  opacity: 50%;
+  cursor: not-allowed;
+  pointer-events: none;
 }

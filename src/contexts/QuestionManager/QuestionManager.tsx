@@ -6,7 +6,7 @@ import { useCategoryManager } from 'contexts/CategoryManager';
 import { useEventManager } from 'contexts/EventManager';
 
 interface Props {
-  children?: React.ReactNode | React.ReactNode[];
+  children?: React.ReactChild;
 }
 
 interface QuestionManager {

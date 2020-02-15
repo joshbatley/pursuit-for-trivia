@@ -1,13 +1,14 @@
 import React from 'react';
-import style from './styles.module.css';
+import styles from './styles.module.css';
 
 interface Props {
-  children: React.ReactNode | React.ReactNode[];
+  children: React.ReactChild;
   onClick?: () => void;
+  disabled?: boolean;
 }
 
-const Button: React.FC<Props> = ({ children, onClick }: Props) => (
-  <button type="button" className={style.box} onClick={onClick}>{ children }</button>
+const Button: React.FC<Props> = ({ children, onClick, disabled }: Props) => (
+  <button type="button" className={styles.box} onClick={onClick} disabled={disabled}>{ children }</button>
 );
 
 export default Button;

@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import confetti from 'canvas-confetti';
-import style from './styles.module.css';
+import styles from './styles.module.css';
 
 interface Props {
   event: string | null;
@@ -58,7 +58,7 @@ const Animatior: React.FC<Props> = ({ event }: Props) => {
   }, [event]);
 
   return (
-    <canvas ref={canvasRef} className={style.canvas} />
+    <canvas ref={canvasRef} className={styles.canvas} />
   );
 };
 

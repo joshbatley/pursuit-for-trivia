@@ -1,7 +1,7 @@
 import React, { createContext, useReducer, useContext } from 'react';
 
 interface Props {
-  children?: React.ReactNode | React.ReactNode[];
+  children?: React.ReactChild;
 }
 
 export enum AllowActions {

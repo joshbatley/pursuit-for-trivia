@@ -6,7 +6,7 @@ import { EventManagerProvider } from 'contexts/EventManager';
 
 import Component from '../ModeSelector';
 
-function render(children: React.ReactNode | React.ReactNode[]) {
+function render(children: React.ReactChild) {
   return testRender(
     <Router>
       <EventManagerProvider>

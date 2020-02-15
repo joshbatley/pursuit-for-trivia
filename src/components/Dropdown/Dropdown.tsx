@@ -1,5 +1,5 @@
 import React from 'react';
-import style from './styles.module.css';
+import styles from './styles.module.css';
 
 interface Props {
   options?: Record<string, string | number>[] | null;
@@ -12,7 +12,7 @@ let v = Symbol.for('selected').toString();
 const Dropdown: React.FC<Props> = ({ options, placeholder, onChange = () => { } }: Props) => (
   <select
     data-testid="dropdown"
-    className={style.select}
+    className={styles.select}
     onChange={({ target }) => onChange(target.value)}
     defaultValue={v}
   >

@@ -6,7 +6,7 @@ import config from 'config';
 import { fetchCategories } from 'api';
 
 interface Props {
-  children?: React.ReactNode | React.ReactNode[];
+  children?: React.ReactChild;
 }
 
 interface CategoryManager {

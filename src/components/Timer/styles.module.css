@@ -46,7 +46,8 @@
 }
 
 .timer__background {
-  fill:  var(--pink-offset);
+  opacity: 50%;
+  fill:  var(--dark-blue);
 }
 
 .timer__left {
@@ -55,6 +56,6 @@
   stroke-dasharray: 354.999;
   /* stroke-dasharray: 709.999; */
   animation: progress calc(var(--time) * 1s) linear forwards;
-  stroke: var(--pink);
+  stroke: var(--dark-blue);
   stroke-linecap: round;
 }

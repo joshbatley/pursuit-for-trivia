@@ -5,7 +5,7 @@ import { EventManagerProvider } from 'contexts/EventManager';
 import { CategoryManagerProvider } from 'contexts/CategoryManager';
 import * as Question from './QuestionManager';
 
-function render(children: React.ReactNode | React.ReactNode[]) {
+function render(children: React.ReactChild) {
   return testRender(
     <EventManagerProvider>
       <CategoryManagerProvider>

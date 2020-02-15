@@ -2,7 +2,7 @@ import React, { useState, createContext, useContext } from 'react';
 import config from 'config';
 
 interface Props {
-  children?: React.ReactNode | React.ReactNode[];
+  children?: React.ReactChild;
 }
 
 interface GameManager {

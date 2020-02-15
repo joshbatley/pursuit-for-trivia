@@ -1,28 +1,36 @@
 import React from 'react';
 import { EmptyArrayOfSize } from 'utils';
 import { ReactComponent as Heart } from 'assets/heart.svg';
-import style from './styles.module.css';
+import config, { Modes } from 'config';
+import classnames from 'classnames';
+import styles from './styles.module.css';
 
 interface Props {
   lives: number;
+  mode?: Modes;
 }
 
-const HeartContainer = () => (
-  <Heart width="32" height="32" className={style.heart} />
+interface HCProps {
+  disabled?: boolean;
+}
+
+const HeartContainer: React.FC<HCProps> = ({ disabled }: HCProps) => (
+  <Heart width="32" height="32" className={classnames(styles.heart, disabled && styles.disabled)} />
 );
 
-const LivesContainer: React.FC<Props> = ({ lives }: Props) => {
+const LivesContainer: React.FC<Props> = ({ lives, mode = Modes.Normal }: Props) => {
   let groupLives = lives > 3;
+  let { maxLives } = config.mode[mode];
 
   return groupLives ? (
-    <div className={style.conatiner}>
-      <h3 className={style.counter}>{lives}</h3>
+    <div className={styles.conatiner}>
+      <h3 className={styles.counter}>{lives}</h3>
       <HeartContainer />
     </div>
   ) : (
-    <div className={style.conatiner}>
-      {EmptyArrayOfSize(lives).map((o, i) => (
-        <HeartContainer key={i} />
+    <div className={styles.conatiner}>
+      {EmptyArrayOfSize(maxLives).map((o, i) => (
+        <HeartContainer key={i} disabled={i >= lives} />
       ))}
     </div>
   );

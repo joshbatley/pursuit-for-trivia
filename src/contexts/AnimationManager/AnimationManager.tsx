@@ -2,7 +2,7 @@ import React, { useState, createContext } from 'react';
 import Animatior from 'components/Animatior';
 
 interface Props {
-  children?: React.ReactNode | React.ReactNode[];
+  children?: React.ReactChild;
 }
 
 interface AnimationManager {

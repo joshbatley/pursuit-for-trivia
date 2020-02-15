@@ -9,5 +9,9 @@
 }
 
 .heart {
+  fill: var(--dark-blue);
+}
 
+.disabled {
+  opacity: 50%;
 }

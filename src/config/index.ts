@@ -1,4 +1,4 @@
-enum Modes {
+export enum Modes {
   Normal = 'normal'
 }
 

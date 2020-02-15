@@ -6,6 +6,6 @@ import Component from '../Start';
 describe('Page Start', () => {
   test('should render and', async () => {
     const { getByText } = render(<Router><Component /></Router>);
-    expect(getByText(/pursuit for trivia/i)).toBeInTheDocument();
+    expect(getByText(/start/i)).toBeInTheDocument();
   });
 });

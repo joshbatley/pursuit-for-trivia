@@ -1,11 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Button from 'components/Button';
-import Title from 'components/Title';
+import Logo from 'components/Logo';
 
 const Start: React.FC = () => (
   <section>
-    <Title>Pursuit for Trivia</Title>
+    <Logo />
+    <Link to="/game" style={{ gridRowStart: 3 }}>
+      <Button disabled>Continue</Button>
+    </Link>
     <Link to="/mode-selector" style={{ gridRowStart: 3 }}>
       <Button>Start</Button>
     </Link>

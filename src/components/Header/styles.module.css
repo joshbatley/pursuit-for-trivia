@@ -2,11 +2,9 @@
   display: flex;
   padding: 0;
   justify-content: space-evenly;
-  background: var(--white);
   z-index: -20;
   position: relative;
   height: 50px;
-  /* box-shadow: var(--hover-shadow); */
 }
 
 .header > div {
