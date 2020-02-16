@@ -6,6 +6,7 @@ import Button from 'components/Button';
 import { useEventManager, AllowActions } from 'contexts/EventManager';
 import PageTitle from 'components/PageTitle';
 import Heading from 'components/Heading';
+import Grid from 'components/Grid';
 
 const ModeSelector: React.FC = () => {
   let { categories, setCategory } = useCategoryManager();
@@ -16,7 +17,7 @@ const ModeSelector: React.FC = () => {
   }
 
   return (
-    <section>
+    <Grid>
       <PageTitle>Set up</PageTitle>
       <Heading>How to play</Heading>
       <Dropdown options={categories} onChange={onChange} placeholder="Difficulty" />
@@ -24,7 +25,7 @@ const ModeSelector: React.FC = () => {
       <Link to="/game/normal">
         <Button onClick={() => dispatch({ type: AllowActions.START })}>Play</Button>
       </Link>
-    </section>
+    </Grid>
   );
 };
 

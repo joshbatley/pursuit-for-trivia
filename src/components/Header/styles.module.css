@@ -5,6 +5,7 @@
   z-index: -20;
   position: relative;
   height: 50px;
+  align-self: baseline;
 }
 
 .header > div {

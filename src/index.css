@@ -34,19 +34,4 @@ body {
 
 a {
   text-decoration: none;
-  color: var(--link-color);
-  transition: color 100ms ease-in;
-}
-
-a:hover{
-  color: var(--white);
-}
-
-section {
-  display: grid;
-  flex-wrap: wrap;
-  align-items: center;
-  height: calc(100vh - 5px);
-  width: 100%;
-  margin-bottom: 5px;
 }

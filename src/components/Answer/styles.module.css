@@ -1,5 +1,5 @@
 .container {
-  width: 100%;
+  max-width: 100%;
   border: 2px solid var(--white);
   border-radius: var(--border-radius);
   font-size: 18px;
@@ -8,7 +8,7 @@
 
   display: flex;
   flex-wrap: nowrap;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
 }
 
