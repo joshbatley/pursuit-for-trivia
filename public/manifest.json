@@ -19,7 +19,7 @@
       "src": "icon-192.png",
       "type": "image/png",
       "sizes": "192x192",
-      "purpose": "maskable any"
+      "purpose": "any maskable"
     },
     {
       "src": "icon512.png",
