@@ -7,7 +7,26 @@
   color: var(--white);
   padding: 14px 20px;
   display: flex;
-
+  margin: 15px 0 0;
   -webkit-appearance: none;
   -moz-appearance: none;
+}
+
+.label {
+  position: relative;
+}
+
+.label::after {
+  content: '';
+  background: url('../../assets/down.svg') no-repeat center center;
+  width: 25px;
+  height: 25px;
+  display: block;
+  position: absolute;
+  right: 10px;
+  top: calc(50% + 5px);
+}
+
+.label + .label {
+  margin-top: 35px;
 }

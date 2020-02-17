@@ -10,17 +10,20 @@ interface Props {
 let v = Symbol.for('selected').toString();
 
 const Dropdown: React.FC<Props> = ({ options, placeholder, onChange = () => { } }: Props) => (
-  <select
-    data-testid="dropdown"
-    className={styles.select}
-    onChange={({ target }) => onChange(target.value)}
-    defaultValue={v}
-  >
-    {placeholder && (<option value={v} disabled>{placeholder}</option>)}
-    {options?.map(({ id, name }) => (
-      <option key={id} value={id}>{name}</option>
-    ))}
-  </select>
+  <label className={styles.label}>
+    {placeholder}
+    <select
+      className={styles.select}
+      data-testid="dropdown"
+      onChange={({ target }) => onChange(target.value)}
+      defaultValue={v}
+    >
+      {placeholder && (<option value={v} disabled>{placeholder}</option>)}
+      {options?.map(({ id, name }) => (
+        <option key={id} value={id}>{name}</option>
+      ))}
+    </select>
+  </label>
 );
 
 export default Dropdown;

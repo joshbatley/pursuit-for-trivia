@@ -17,15 +17,17 @@ const GameScene: React.FC<Props> = ({ match }: Props) => {
 
   startGame(params.mode);
   return (
-    <Grid>
+    <>
       <Header lives={3} score={0} />
-      <Heading>QUESTION 1</Heading>
-      <Text>123</Text>
-      <Answer text="asddas" id="1" />
-      <Answer text="asddas" id="1" />
-      <Answer text="asddas" id="1" />
-      <Answer text="asddas" id="1" />
-    </Grid>
+      <Grid gutter="0 25px">
+        <Heading>QUESTION 1</Heading>
+        <Text>123</Text>
+        <Answer text="asddas" id="1" />
+        <Answer text="asddas" id="1" />
+        <Answer text="asddas" id="1" />
+        <Answer text="asddas" id="1" />
+      </Grid>
+    </>
   );
 };
 

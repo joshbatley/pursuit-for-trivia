@@ -20,6 +20,11 @@
   --round-radius: 50px;
 }
 
+body, * {
+  box-sizing: border-box;
+}
+
+
 body {
   font-size: 16px;
   background: var(--background);
@@ -30,6 +35,15 @@ body {
   -moz-osx-font-smoothing: grayscale;
   height: 100vh;
   font-weight: bold;
+  justify-content: center;
+}
+
+
+@media (min-width: 768px) {
+  body {
+    max-width: 400px;
+    margin: 0 auto;
+  }
 }
 
 a {
