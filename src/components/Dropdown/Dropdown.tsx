@@ -1,8 +1,12 @@
 import React from 'react';
+import { isObj } from 'utils';
 import styles from './styles.module.css';
 
+
+type Option = Record<string, string | number> | string | number;
+
 interface Props {
-  options?: Record<string, string | number>[] | null;
+  options?: Option[] | null;
   placeholder?: string;
   onChange?: (v: string) => void;
 }
@@ -19,9 +23,11 @@ const Dropdown: React.FC<Props> = ({ options, placeholder, onChange = () => { } 
       defaultValue={v}
     >
       {placeholder && (<option value={v} disabled>{placeholder}</option>)}
-      {options?.map(({ id, name }) => (
-        <option key={id} value={id}>{name}</option>
-      ))}
+      {options && options?.map((o: Option, idx: number) => (isObj(o) ? (
+        <option key={o.id} value={o.id}>{o.name}</option>
+      ) : (
+        <option key={idx} value={o}>{o}</option>
+      )))}
     </select>
   </label>
 );

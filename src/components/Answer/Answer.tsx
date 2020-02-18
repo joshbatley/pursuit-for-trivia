@@ -1,6 +1,5 @@
 import React from 'react';
 import { ReactComponent as Checkmark } from 'assets/checkmark.svg';
-import Flex from 'components/Flex';
 import styles from './styles.module.css';
 
 interface Props {

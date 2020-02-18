@@ -1,4 +1,4 @@
-export function isObj(obj: unknown): boolean {
+export function isObj(obj: unknown): obj is Record<string, any> {
   return typeof obj === 'object' && obj !== null && !(obj instanceof Array);
 }
 
@@ -10,7 +10,7 @@ export function isEmptyString(arg: unknown): boolean {
   return typeof arg === 'string' && arg.length <= 0;
 }
 
-export function isArray(arg: unknown): boolean {
+export function isArray(arg: unknown): arg is Array<unknown> {
   return arg instanceof Array;
 }
 
@@ -18,7 +18,7 @@ export function isEmptyArray(arg: unknown): boolean {
   return arg instanceof Array && arg.length <= 0;
 }
 
-export function isNullOrUndefined(arg: unknown): boolean {
+export function isNullOrUndefined(arg: unknown): arg is null | undefined {
   return arg == null;
 }
 

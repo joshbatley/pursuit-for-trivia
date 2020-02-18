@@ -34,8 +34,8 @@ const ModeSelector: React.FC = () => {
         </Text>
       </Flex>
       <Flex>
-        <Dropdown options={categories} onChange={onChange} placeholder="Difficulty" />
-        <Dropdown options={difficulty} onChange={onChange} placeholder="Category" />
+        <Dropdown options={categories} onChange={onChange} placeholder="Category" />
+        <Dropdown options={difficulty} onChange={onChange} placeholder="Difficulty" />
       </Flex>
       <Button
         to="/game/normal"

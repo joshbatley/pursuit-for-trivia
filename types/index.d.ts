@@ -23,7 +23,7 @@ type QuestionRes = Question[];
 interface Settings {
   maxLives: number;
   maxTime: number;
-  difficulty: Record<string, number | string>[];
+  difficulty: string[];
 }
 
 type API = 'questionURL' | 'categoryURL' | 'tokenURL';
