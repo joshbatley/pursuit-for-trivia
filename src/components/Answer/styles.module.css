@@ -1,11 +1,19 @@
 .container {
-  max-width: 100%;
+  width: 100%;
+  flex: 1 1 100%;
+}
+
+.container + .container {
+  margin-top: 35px;
+}
+
+.label {
+  width: 100%;
   border: 2px solid var(--white);
   border-radius: var(--border-radius);
   font-size: 18px;
   color: var(--white);
-  padding: 14px 20px;
-
+  padding: 10px 20px;
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-between;
@@ -24,7 +32,7 @@
   width: 1px;
 }
 
-.checkbox:checked + .container {
+.checkbox:checked + .label {
   color: var(--blue);
   border-color: var(--blue);
 }
@@ -33,6 +41,6 @@
   opacity: 0;
 }
 
-.checkbox:checked + .container > .icon {
+.checkbox:checked + .label > .icon {
   opacity: 1;
 }

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { useEventManager, AllowActions } from 'contexts/EventManager';
 import { useCategoryManager } from 'contexts/CategoryManager';
 import Dropdown from 'components/Dropdown';
@@ -9,9 +8,11 @@ import Heading from 'components/Heading';
 import Grid from 'components/Grid';
 import Text from 'components/Text';
 import Flex from 'components/Flex';
+import config from 'config';
 
 const ModeSelector: React.FC = () => {
   let { categories, setCategory } = useCategoryManager();
+  let { difficulty } = config.mode.normal;
   let { dispatch } = useEventManager();
 
   function onChange(value: string) {
@@ -34,11 +35,14 @@ const ModeSelector: React.FC = () => {
       </Flex>
       <Flex>
         <Dropdown options={categories} onChange={onChange} placeholder="Difficulty" />
-        <Dropdown options={categories} onChange={onChange} placeholder="Category" />
+        <Dropdown options={difficulty} onChange={onChange} placeholder="Category" />
       </Flex>
-      <Link to="/game/normal">
-        <Button onClick={() => dispatch({ type: AllowActions.START })}>Play</Button>
-      </Link>
+      <Button
+        to="/game/normal"
+        onClick={() => dispatch({ type: AllowActions.START })}
+      >
+        Play
+      </Button>
     </Grid>
   );
 };
