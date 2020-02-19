@@ -8,7 +8,7 @@ function render(children: React.ReactChild) {
   return testRender(
     <CategoryManagerProvider>
       {children}
-    </CategoryManagerProvider>
+    </CategoryManagerProvider>,
   );
 }
 
