@@ -13,14 +13,7 @@ function render(children: React.ReactChild) {
 
 describe('Page GameScene', () => {
   test('should render and', async () => {
-    // isExact, path, url
-    let match = {
-      params: { mode: 'normal' },
-      isExact: false,
-      path: '/game/normal',
-      url: '/',
-    };
-    const { getByText } = render(<Component match={match} />);
+    const { getByText } = render(<Component />);
     expect(getByText(/30/i)).toBeInTheDocument();
   });
 });

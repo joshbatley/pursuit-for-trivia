@@ -46,7 +46,7 @@
 }
 
 .timer__background {
-  opacity: 50%;
+  opacity: 0.5;
   fill:  var(--dark-blue);
 }
 
