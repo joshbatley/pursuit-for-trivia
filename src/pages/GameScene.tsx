@@ -1,6 +1,4 @@
 import React from 'react';
-import ReactRouter from 'react-router-dom';
-import { useGameManager } from 'contexts/GameManager';
 import Header from 'components/Header';
 import Heading from 'components/Heading';
 import Text from 'components/Text';
@@ -9,16 +7,52 @@ import Grid from 'components/Grid';
 import Flex from 'components/Flex';
 import Button from 'components/Button';
 
-interface Props {
-  match: ReactRouter.match<{ mode: string }>;
-}
+// interface GameManager {
+//   lives: number;
+//   timesUp: () => void;
+//   resetGame: () => void;
+//   startGame: (mode: string) => void;
+//   correct: () => Promise<void>;
+//   incorrect: () => Promise<void>;
+// }
 
-const GameScene: React.FC<Props> = ({ match }: Props) => {
-  let { params } = match;
-  let { startGame } = useGameManager();
+const GameScene: React.FC = () => {
+  // let { lives, score, answers, timeUp, question, questionNo, submit }
+  // let { params } = match;
   let question = 'Which artist composed the original soundtrack for “Watch Dogs 2“?';
 
-  startGame(params.mode);
+  // let startGame = async (): Promise<void> => {
+  //    fire start event stasrt
+  // };
+
+  // let loseLife = (): void => setLives(lives - 1);
+  // let resetLife = (): void => setLives(maxLives);
+
+  // let resetGame = (): void => {
+  //   resetLife();
+  // };
+
+  // let timesUp = async (): Promise<void> => {
+  //   loseLife();
+  //   // Times up animation
+  //   // reveal answers
+  //   // next question
+  // };
+
+  // let correct = async (): Promise<void> => {
+  //   // Fire confetti
+  //   // reveal answers
+  //   // next question
+  // };
+
+  // let incorrect = async (): Promise<void> => {
+  //   loseLife();
+  //   // Dunce animation
+  //   // reveal answers
+  //   // next question
+  // };
+
+  // startGame(params.mode);
   return (
     <>
       <Header lives={3} score={0} />
