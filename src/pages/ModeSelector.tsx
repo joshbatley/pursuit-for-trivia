@@ -1,5 +1,4 @@
 import React from 'react';
-import { useEventManager, AllowActions } from 'contexts/EventManager';
 import { useCategoryManager } from 'contexts/CategoryManager';
 import Dropdown from 'components/Dropdown';
 import Button from 'components/Button';
@@ -13,7 +12,6 @@ import config from 'config';
 const ModeSelector: React.FC = () => {
   let { categories, setCategory } = useCategoryManager();
   let { difficulty } = config.mode.normal;
-  let { dispatch } = useEventManager();
 
   function onChange(value: string) {
     setCategory(parseInt(value, 10));
@@ -37,10 +35,7 @@ const ModeSelector: React.FC = () => {
         <Dropdown options={categories} onChange={onChange} placeholder="Category" />
         <Dropdown options={difficulty} onChange={onChange} placeholder="Difficulty" />
       </Flex>
-      <Button
-        to="/game/normal"
-        onClick={() => dispatch({ type: AllowActions.START })}
-      >
+      <Button to="/game/normal">
         Play
       </Button>
     </Grid>

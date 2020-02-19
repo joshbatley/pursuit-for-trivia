@@ -3,7 +3,6 @@ import React, {
 } from 'react';
 import { fetchQuestions } from 'api';
 import { useCategoryManager } from 'contexts/CategoryManager';
-import { useEventManager } from 'contexts/EventManager';
 
 interface Props {
   children?: React.ReactChild;
@@ -34,7 +33,6 @@ export const QuestionManagerProvider: React.FC<Props> = ({ children }: Props) =>
   let [current, setCurrent] = useState(0);
   let [question, setQuestions] = useState<Question[] | null>([]);
   let { selected } = useCategoryManager();
-  let { state } = useEventManager();
 
   let fetch = useCallback(async (): Promise<void> => {
     if (question == null || question.length > 0) {
@@ -50,15 +48,15 @@ export const QuestionManagerProvider: React.FC<Props> = ({ children }: Props) =>
     }
   }, [selected, question]);
 
-  useEffect(() => {
-    switch (state.current) {
-      case 'game':
-        fetch();
-        break;
-      default:
-        break;
-    }
-  });
+  // useEffect(() => {
+  //   switch (state.current) {
+  //     case 'setup':
+  //       fetch();
+  //       break;
+  //     default:
+  //       break;
+  //   }
+  // });
   let next = async (): Promise<void> => setCurrent(current + 1);
 
   let reset = (): void => { };

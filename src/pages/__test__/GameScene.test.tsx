@@ -1,15 +1,12 @@
 import React from 'react';
 import { render as testRender } from '@testing-library/react';
 import { MemoryRouter as Router } from 'react-router-dom';
-import { GameManagerProvider } from 'contexts/GameManager';
 import Component from '../GameScene';
 
 function render(children: React.ReactChild) {
   return testRender(
     <Router>
-      <GameManagerProvider>
-        {children}
-      </GameManagerProvider>
+      {children}
     </Router>,
   );
 }
