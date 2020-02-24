@@ -4,11 +4,11 @@ import styles from './styles.module.css';
 
 interface Props {
   text: string;
-  id: string;
+  id: string | number;
   name?: string;
 }
 
-const formatId = (id: string) => `button-${id}`;
+const formatId = (id: string | number) => `button-${id}`;
 
 const Answer: React.FC<Props> = ({ text, id, name = 'answer' }: Props) => (
   <div className={styles.container}>

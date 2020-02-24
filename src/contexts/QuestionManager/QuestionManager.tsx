@@ -1,21 +1,22 @@
 import React, {
-  useState, useCallback, createContext, useContext, useEffect,
+  useState, useCallback, createContext, useContext, useRef,
 } from 'react';
 import { fetchQuestions } from 'api';
 import { useCategoryManager } from 'contexts/CategoryManager';
+import { isNullOrUndefined } from 'utils';
 
 interface Props {
   children?: React.ReactChild;
 }
 
 interface QuestionManager {
-  next: () => Promise<void>;
+  next: () => Promise<Question>;
   reset: () => void;
-  fetch: () => Promise<void>;
   questionArray: Question[] | null;
   revealAnswers: () => void;
   shuffle: () => void;
   clear: () => void;
+  error: Error | null;
 }
 
 const QuestionManagerCtx = createContext<QuestionManager | void>(undefined);
@@ -30,34 +31,48 @@ export function useQuestionManager(): QuestionManager {
 }
 
 export const QuestionManagerProvider: React.FC<Props> = ({ children }: Props) => {
-  let [current, setCurrent] = useState(0);
-  let [question, setQuestions] = useState<Question[] | null>([]);
+  let current = useRef(0);
+  let questions = useRef<Question[]>([]);
+  let error = useRef<Error | null>(null);
+  let [isLoading, setLoading] = useState(false);
   let { selected } = useCategoryManager();
 
   let fetch = useCallback(async (): Promise<void> => {
-    if (question == null || question.length > 0) {
+    if (questions == null || questions.current.length > 0 || isLoading === true) {
       return;
     }
     try {
-      let res = await fetchQuestions({ category: selected });
-      if (res) {
-        setQuestions(res);
+      setLoading(true);
+      let nextSet = await fetchQuestions({ category: selected });
+      if (!isNullOrUndefined(nextSet)) {
+        questions.current = [...questions.current, ...nextSet as Question[]];
       }
     } catch (err) {
-      setQuestions(null);
+      error.current = err;
+    } finally {
+      setLoading(false);
     }
-  }, [selected, question]);
+  }, [selected, isLoading]);
 
-  // useEffect(() => {
-  //   switch (state.current) {
-  //     case 'setup':
-  //       fetch();
-  //       break;
-  //     default:
-  //       break;
-  //   }
-  // });
-  let next = async (): Promise<void> => setCurrent(current + 1);
+  async function next(): Promise<Question> {
+    if (questions.current.length <= 0) {
+      // no question so fetch them
+      await fetch();
+    } else if (questions.current.length >= current.current - 3) {
+      // fetch more if 4 away fro last
+      await fetch();
+      current.current += 1;
+    } else {
+      // just get next question
+      current.current += 1;
+    }
+
+    return new Promise((res) => {
+      if (isLoading !== true) {
+        return res(questions.current[current.current]);
+      }
+    });
+  }
 
   let reset = (): void => { };
   let shuffle = (): void => { };
@@ -66,12 +81,12 @@ export const QuestionManagerProvider: React.FC<Props> = ({ children }: Props) =>
 
   let values: QuestionManager = {
     next,
-    fetch,
     reset,
-    questionArray: question,
+    questionArray: questions.current,
     revealAnswers,
     shuffle,
     clear,
+    error: error.current,
   };
 
   return (

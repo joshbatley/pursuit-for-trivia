@@ -1,4 +1,4 @@
-import React, { useState, createContext } from 'react';
+import React, { useState, createContext, useContext } from 'react';
 import Animatior from 'components/Animatior';
 
 interface Props {
@@ -11,6 +11,16 @@ interface AnimationManager {
 }
 
 export const AnimationManagerCtx = createContext<AnimationManager | void>(undefined);
+
+export function useAnimationManager(): AnimationManager {
+  let context = useContext(AnimationManagerCtx);
+  if (context === undefined) {
+    throw new Error('useAnimationManager must be used within a AnimationManagerProvider');
+  }
+
+  return context;
+}
+
 
 export const AnimationManagerProvider: React.FC<Props> = ({ children }: Props) => {
   let [animation, fireAnimation] = useState<string | null>(null);

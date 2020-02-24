@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './styles.module.css';
 
 interface Props {
-  children: React.ReactChild | React.ReactChild[];
+  children: React.ReactChild | React.ReactChild[] | undefined;
   style?: Record<string, string | number>;
 }
 

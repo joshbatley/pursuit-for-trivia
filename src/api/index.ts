@@ -9,7 +9,7 @@ async function fetchQuestions({
   difficulty = 'medium',
 }: FetchQuestionsArgs): Promise<Question[] | null> {
   let questString = parseObjToQueryStr({
-    category, type, encoding, difficulty,
+    category, type, encoding, difficulty, amount: 50,
   });
 
   try {
