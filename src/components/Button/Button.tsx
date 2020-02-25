@@ -7,14 +7,15 @@ interface Props {
   onClick?: () => void;
   disabled?: boolean;
   to?: string;
+  type?: 'button' | 'submit' | 'reset';
 }
 
-const Button: React.FC<Props> = ({
-  children, onClick, disabled, to, ...props
+const Button: React.FC<Props & React.HTMLProps<HTMLButtonElement>> = ({
+  children, onClick, disabled, type = 'button', to, ...props
 }: Props) => {
   const btn = (
     <button
-      type="button"
+      type={type}
       className={styles.box}
       onClick={onClick}
       disabled={disabled}

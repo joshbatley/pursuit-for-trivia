@@ -1,5 +1,8 @@
-import { useState, useCallback, useEffect } from 'react';
+import {
+  useState, useCallback, useEffect, FormEvent,
+} from 'react';
 import config from 'config';
+import { shuffle } from 'utils';
 import { useQuestionManager } from 'contexts/QuestionManager';
 import { useAnimationManager } from 'contexts/AnimationManager';
 
@@ -7,19 +10,28 @@ import { useAnimationManager } from 'contexts/AnimationManager';
 interface Values {
   lives: number;
   score: number;
-  answers: string[] | undefined;
+  answers: {
+    text: string;
+    isAnswer: boolean | null;
+    id: number;
+  }[];
   question: string | undefined;
   questionNo: number;
 }
 
 interface Functions {
   timeUp: () => void;
-  submit: () => void;
+  submit: (answers: string) => (e: FormEvent<Element>) => void;
 }
 
 interface Current {
   question: string;
-  answers: string[];
+  correct: string;
+  answers: {
+    text: string;
+    isAnswer: boolean | null;
+    id: number;
+  }[];
 }
 
 function useGame(): [Values, Functions] {
@@ -32,13 +44,22 @@ function useGame(): [Values, Functions] {
   // let question = 'Which artist composed the original soundtrack for “Watch Dogs 2“?';
 
   let startGame = useCallback(async (): Promise<void> => {
-    // console.log('here');
     if (error == null) {
-      /* eslint-disable @typescript-eslint/camelcase */
       let nextQuestion = await next();
       setCurrent({
-        question: nextQuestion.question,
-        answers: [nextQuestion.correct_answer, ...nextQuestion.incorrect_answers],
+        question: window.atob(nextQuestion.question),
+        correct: window.atob(nextQuestion.correct_answer),
+        answers: [
+          nextQuestion.correct_answer,
+          ...nextQuestion.incorrect_answers,
+        ]
+          .map((i) => window.atob(i))
+          .sort(shuffle)
+          .map((i, id) => ({
+            text: i,
+            isAnswer: null,
+            id,
+          })),
       });
     }
     //  fire start event stasrt
@@ -71,6 +92,29 @@ function useGame(): [Values, Functions] {
   //   // next question
   // };
 
+  function reaveal() {
+    setCurrent(({
+      ...current,
+      answers: current?.answers.map((a) => ({
+        ...a,
+        isAnswer: current?.correct === a.text,
+      })),
+    }) as Current);
+  }
+
+  function submit(answers: string) {
+    return (e: FormEvent) => {
+      e.preventDefault();
+      reaveal();
+      if (answers === current?.correct) {
+        // reveal
+        // score
+      } else {
+        setLives(lives - 1);
+      }
+    };
+  }
+
   useEffect(() => {
     if (current == null) {
       startGame();
@@ -79,12 +123,12 @@ function useGame(): [Values, Functions] {
   return [{
     lives,
     score,
-    answers: current?.answers,
+    answers: current?.answers as Current['answers'],
     question: current?.question,
     questionNo: 1,
   }, {
     timeUp: () => {},
-    submit: () => {},
+    submit,
   }];
 }
 

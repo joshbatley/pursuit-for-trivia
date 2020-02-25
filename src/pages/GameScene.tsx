@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import useGame from 'hooks/useGame';
 import Header from 'components/Header';
 import Heading from 'components/Heading';
@@ -18,6 +18,7 @@ import Button from 'components/Button';
 // }
 
 const GameScene: React.FC = () => {
+  let [answer, setAnswer] = useState('');
   let [{
     lives, score, answers, question, questionNo,
   }, {
@@ -33,12 +34,20 @@ const GameScene: React.FC = () => {
           <Heading>QUESTION {questionNo}</Heading>
           <Text size="24px">{question ?? ''}</Text>
         </Flex>
-        <Flex>
-          {answers && answers.map((a, i) => (
-            <Answer text={a} id={i} key={i} />
-          ))}
-        </Flex>
-        <Button>Submit</Button>
+        <form onSubmit={submit(answer)} id="game">
+          <Flex>
+            {answers && answers.map((a, i) => (
+              <Answer
+                text={a.text}
+                id={i.toString()}
+                key={i}
+                onChange={setAnswer}
+                isAnswer={a.isAnswer}
+              />
+            ))}
+          </Flex>
+        </form>
+        <Button type="submit" form="game">Submit</Button>
       </Grid>
     </>
   );

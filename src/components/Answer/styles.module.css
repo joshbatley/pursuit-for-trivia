@@ -44,3 +44,27 @@
 .checkbox:checked + .label > .icon {
   opacity: 1;
 }
+
+.correct .label {
+  background: #30d065;
+}
+
+.incorrect .label {
+  background: #d03053;
+}
+
+.correct .label, .incorrect .label {
+  border-color: var(--white)!important;
+  color: var(--white)!important;
+}
+
+.correct .checkbox:checked + .label > .icon path,
+.incorrect .checkbox:checked + .label > .icon path {
+  fill: var(--white);
+}
+
+.correct .checkbox:checked + .label > .icon circle,
+.incorrect .checkbox:checked + .label > .icon circle {
+  stroke: var(--white);
+}
+

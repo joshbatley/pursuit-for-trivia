@@ -43,3 +43,7 @@ export function parseObjToQueryStr(args: unknown): string {
 export function EmptyArrayOfSize(size: number) {
   return Array.from(Array(size));
 }
+
+export function shuffle() {
+  return Math.random() - 0.5;
+}

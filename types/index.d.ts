@@ -46,6 +46,6 @@ type QuestionDifficulty = 'easy' | 'medium' | 'hard';
 interface FetchQuestionsArgs {
   category?: number | null;
   type?: QuestionType;
-  encoding?: string;
+  encode?: string;
   difficulty?: QuestionDifficulty;
 }
