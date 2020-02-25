@@ -38,7 +38,7 @@ const GameScene: React.FC = () => {
             ))}
           </Flex>
         </form>
-        <Button type="submit" form="game">Submit</Button>
+        <Button type="submit" form="game" disabled={selected === ''}>Submit</Button>
       </Grid>
     </>
   );
