@@ -3,15 +3,16 @@ import React, {
 } from 'react';
 import { fetchQuestions } from 'api';
 import { useCategoryManager } from 'contexts/CategoryManager';
-import { isNullOrUndefined } from 'utils';
+import { isNullOrUndefined, isEmptyArray } from 'utils';
 
 interface Props {
   children?: React.ReactChild;
 }
 
 interface QuestionManager {
-  next: () => Promise<Question>;
+  next: () => Promise<Question & {current: number}>;
   reset: () => void;
+  isFetching: boolean;
   questionArray: Question[] | null;
   revealAnswers: () => void;
   shuffle: () => void;
@@ -31,7 +32,7 @@ export function useQuestionManager(): QuestionManager {
 }
 
 export const QuestionManagerProvider: React.FC<Props> = ({ children }: Props) => {
-  let current = useRef(0);
+  let current = useRef(-1);
   let questions = useRef<Question[]>([]);
   let error = useRef<Error | null>(null);
   let [isLoading, setLoading] = useState(false);
@@ -54,13 +55,13 @@ export const QuestionManagerProvider: React.FC<Props> = ({ children }: Props) =>
     }
   }, [selected, isLoading]);
 
-  async function next(): Promise<Question> {
-    if (questions.current.length <= 0) {
+  async function next(): Promise<Question & {current: number}> {
+    if (isEmptyArray(questions.current)) {
       // no question so fetch them
-      await fetch();
-    } else if (questions.current.length >= current.current - 3) {
+      fetch();
+    } else if (questions.current.length === current.current - 3) {
       // fetch more if 4 away fro last
-      await fetch();
+      fetch();
       current.current += 1;
     } else {
       // just get next question
@@ -68,8 +69,8 @@ export const QuestionManagerProvider: React.FC<Props> = ({ children }: Props) =>
     }
 
     return new Promise((res) => {
-      if (isLoading !== true) {
-        return res(questions.current[current.current]);
+      if (isLoading === false && !isEmptyArray(questions.current)) {
+        return res({ ...questions.current[current.current], current: current.current });
       }
     });
   }
@@ -82,6 +83,7 @@ export const QuestionManagerProvider: React.FC<Props> = ({ children }: Props) =>
   let values: QuestionManager = {
     next,
     reset,
+    isFetching: isLoading,
     questionArray: questions.current,
     revealAnswers,
     shuffle,

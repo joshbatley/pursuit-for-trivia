@@ -12,7 +12,7 @@ export enum Events {
 
 interface AnimationManager {
   animation: Events | null;
-  fireAnimation: React.Dispatch<Events>;
+  fireAnimation: (event: Events) => Promise<void>;
 }
 
 export const AnimationManagerCtx = createContext<AnimationManager | void>(undefined);
@@ -31,10 +31,13 @@ export const AnimationManagerProvider: React.FC<Props> = ({ children }: Props) =
   let [animation, setAnimation] = useState<Events | null>(null);
 
   function fireAnimation(event: Events) {
-    setAnimation(event);
-    setTimeout(() => {
-      setAnimation(null);
-    }, 500);
+    return new Promise<void>((res) => {
+      setAnimation(event);
+      setTimeout(() => {
+        setAnimation(null);
+        res();
+      }, 500);
+    });
   }
 
   return (

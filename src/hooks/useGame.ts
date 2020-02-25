@@ -6,64 +6,63 @@ import { shuffle } from 'utils';
 import { useQuestionManager } from 'contexts/QuestionManager';
 import { useAnimationManager, Events } from 'contexts/AnimationManager';
 
-
-interface Values {
-  lives: number;
-  score: number;
-  answers: {
-    text: string;
-    isAnswer: boolean | null;
-    id: number;
-  }[];
-  question: string | undefined;
-  questionNo: number;
-}
-
-interface Functions {
-  timeUp: () => void;
-  submit: (answers: string) => (e: FormEvent<Element>) => void;
+interface Answer {
+  text: string;
+  isAnswer: boolean | null;
+  id: number;
+  onChange: () => void;
 }
 
 interface Current {
+  current: number;
   question: string;
   correct: string;
-  answers: {
-    text: string;
-    isAnswer: boolean | null;
-    id: number;
-  }[];
+  answers: Answer[];
 }
 
-function useGame(): [Values, Functions] {
-  // Load from params and storage
-  let { next, error } = useQuestionManager();
+interface ReturnedValues {
+  lives: number;
+  score: number;
+  answers: Answer[];
+  question: string | undefined;
+  questionNo: number;
+  isFetching: boolean;
+}
+
+interface ReturnedFunctions {
+  timeUp: () => void;
+  submit: (e: FormEvent<Element>) => void;
+}
+
+function useGame(): [ReturnedValues, ReturnedFunctions] {
+  // TOOD: Load from params and storage
+  let { next, error, isFetching } = useQuestionManager();
   let animation = useAnimationManager();
   let [lives, setLives] = useState(config.mode.normal.maxLives);
   let [score, setScore] = useState(0);
+  let [answer, setAnswer] = useState('');
   let [current, setCurrent] = useState<Current | null>(null);
-  // let question = 'Which artist composed the original soundtrack for “Watch Dogs 2“?';
 
-  let startGame = useCallback(async (): Promise<void> => {
-    if (error == null) {
-      let nextQuestion = await next();
-      setCurrent({
-        question: window.atob(nextQuestion.question),
-        correct: window.atob(nextQuestion.correct_answer),
-        answers: [
-          nextQuestion.correct_answer,
-          ...nextQuestion.incorrect_answers,
-        ]
-          .map((i) => window.atob(i))
-          .sort(shuffle)
-          .map((i, id) => ({
-            text: i,
-            isAnswer: null,
-            id,
-          })),
-      });
-    }
-    //  fire start event stasrt
-  }, [error, next]);
+  const saveNext = useCallback(async () => {
+    let nextQuestion = await next();
+    setCurrent({
+      current: nextQuestion.current,
+      question: window.atob(nextQuestion.question),
+      correct: window.atob(nextQuestion.correct_answer),
+      answers: [
+        nextQuestion.correct_answer,
+        ...nextQuestion.incorrect_answers,
+      ]
+        .map((i) => window.atob(i))
+        .sort(shuffle)
+        .map((i, id) => ({
+          text: i,
+          isAnswer: null,
+          id,
+          onChange: () => setAnswer(i),
+        })),
+    });
+  }, [next]);
 
   // let loseLife = (): void => setLives(lives - 1);
   // let resetLife = (): void => setLives(maxLives);
@@ -102,30 +101,35 @@ function useGame(): [Values, Functions] {
     }) as Current);
   }
 
-  function submit(answers: string) {
-    return (e: FormEvent) => {
-      e.preventDefault();
-      reaveal();
-      if (answers === current?.correct) {
-        animation.fireAnimation(Events.CORRECT);
-      } else {
-        setLives(lives - 1);
-        animation.fireAnimation(Events.INCORRECT);
-      }
-    };
+  async function submit(e: FormEvent) {
+    e.preventDefault();
+    reaveal();
+    if (answer === current?.correct) {
+      await animation.fireAnimation(Events.CORRECT);
+      await saveNext();
+    } else {
+      setLives(lives - 1);
+      animation.fireAnimation(Events.INCORRECT);
+    }
   }
 
   useEffect(() => {
-    if (current == null) {
+    async function startGame() {
+      await saveNext();
+    }
+
+    if (current == null && error == null && isFetching === false) {
       startGame();
     }
-  }, [current, startGame]);
+  }, [current, error, saveNext, isFetching]);
+
   return [{
     lives,
     score,
+    isFetching,
     answers: current?.answers as Current['answers'],
     question: current?.question,
-    questionNo: 1,
+    questionNo: current?.current as number,
   }, {
     timeUp: () => {},
     submit,

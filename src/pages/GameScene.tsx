@@ -9,30 +9,29 @@ import Flex from 'components/Flex';
 import Button from 'components/Button';
 
 const GameScene: React.FC = () => {
-  let [answer, setAnswer] = useState('');
   let [{
-    lives, score, answers, question, questionNo,
+    lives, score, answers, question, questionNo, isFetching,
   }, {
     timeUp, submit,
   }] = useGame();
-  // let { params } = match;
 
   return (
     <>
       <Header lives={lives} score={score} />
+      { isFetching && (<>loading</>)}
       <Grid gutter="75px 25px 0" template="35% 40% 20%">
         <Flex style={{ alignSelf: 'self-start' }}>
           <Heading>QUESTION {questionNo}</Heading>
           <Text size="24px">{question ?? ''}</Text>
         </Flex>
-        <form onSubmit={submit(answer)} id="game">
+        <form onSubmit={submit} id="game">
           <Flex>
             {answers && answers.map((a, i) => (
               <Answer
                 text={a.text}
                 id={i.toString()}
                 key={i}
-                onChange={setAnswer}
+                onChange={a.onChange}
                 isAnswer={a.isAnswer}
               />
             ))}
