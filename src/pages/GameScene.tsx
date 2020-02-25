@@ -21,7 +21,7 @@ const GameScene: React.FC = () => {
       { isFetching && (<>loading</>)}
       <Grid gutter="75px 25px 0" template="35% 40% 20%">
         <Flex style={{ alignSelf: 'self-start' }}>
-          <Heading>QUESTION {questionNo}</Heading>
+          <Heading>QUESTION {questionNo + 1}</Heading>
           <Text size="24px">{question ?? ''}</Text>
         </Flex>
         <form onSubmit={submit} id="game">
