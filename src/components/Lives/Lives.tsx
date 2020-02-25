@@ -23,12 +23,12 @@ const LivesContainer: React.FC<Props> = ({ lives, mode = Modes.Normal }: Props) 
   let { maxLives } = config.mode[mode];
 
   return groupLives ? (
-    <div className={styles.conatiner}>
+    <div className={styles.container}>
       <h3 className={styles.counter}>{lives}</h3>
       <HeartContainer />
     </div>
   ) : (
-    <div className={styles.conatiner}>
+    <div className={styles.container}>
       {EmptyArrayOfSize(maxLives).map((o, i) => (
         <HeartContainer key={i} disabled={i >= lives} />
       ))}
