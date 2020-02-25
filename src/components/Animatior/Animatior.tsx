@@ -1,9 +1,10 @@
 import React, { useRef, useEffect } from 'react';
 import confetti from 'canvas-confetti';
+import { Events } from 'contexts/AnimationManager';
 import styles from './styles.module.css';
 
 interface Props {
-  event: string | null;
+  event: Events | null;
 }
 
 const leftCannon = {
@@ -48,11 +49,11 @@ const Animatior: React.FC<Props> = ({ event }: Props) => {
       });
     }
 
-    if (event === 'CORRECT') {
+    if (event === Events.CORRECT) {
       fire(['#2eb872', '#a3de83']);
     }
 
-    if (event === 'INCORRECT') {
+    if (event === Events.INCORRECT) {
       fire(['#e84545', '#88304e']);
     }
   }, [event]);

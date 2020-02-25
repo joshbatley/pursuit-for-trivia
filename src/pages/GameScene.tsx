@@ -8,15 +8,6 @@ import Grid from 'components/Grid';
 import Flex from 'components/Flex';
 import Button from 'components/Button';
 
-// interface GameManager {
-//   lives: number;
-//   timesUp: () => void;
-//   resetGame: () => void;
-//   startGame: (mode: string) => void;
-//   correct: () => Promise<void>;
-//   incorrect: () => Promise<void>;
-// }
-
 const GameScene: React.FC = () => {
   let [answer, setAnswer] = useState('');
   let [{

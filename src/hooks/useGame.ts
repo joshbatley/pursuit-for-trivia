@@ -4,7 +4,7 @@ import {
 import config from 'config';
 import { shuffle } from 'utils';
 import { useQuestionManager } from 'contexts/QuestionManager';
-import { useAnimationManager } from 'contexts/AnimationManager';
+import { useAnimationManager, Events } from 'contexts/AnimationManager';
 
 
 interface Values {
@@ -107,10 +107,10 @@ function useGame(): [Values, Functions] {
       e.preventDefault();
       reaveal();
       if (answers === current?.correct) {
-        // reveal
-        // score
+        animation.fireAnimation(Events.CORRECT);
       } else {
         setLives(lives - 1);
+        animation.fireAnimation(Events.INCORRECT);
       }
     };
   }

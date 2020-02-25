@@ -5,9 +5,14 @@ interface Props {
   children?: React.ReactChild;
 }
 
+export enum Events {
+  'CORRECT',
+  'INCORRECT'
+}
+
 interface AnimationManager {
-  animation: string | null;
-  fireAnimation: React.Dispatch<string>;
+  animation: Events | null;
+  fireAnimation: React.Dispatch<Events>;
 }
 
 export const AnimationManagerCtx = createContext<AnimationManager | void>(undefined);
@@ -23,7 +28,14 @@ export function useAnimationManager(): AnimationManager {
 
 
 export const AnimationManagerProvider: React.FC<Props> = ({ children }: Props) => {
-  let [animation, fireAnimation] = useState<string | null>(null);
+  let [animation, setAnimation] = useState<Events | null>(null);
+
+  function fireAnimation(event: Events) {
+    setAnimation(event);
+    setTimeout(() => {
+      setAnimation(null);
+    }, 500);
+  }
 
   return (
     <AnimationManagerCtx.Provider value={{ animation, fireAnimation }}>
