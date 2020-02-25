@@ -27,6 +27,7 @@ interface ReturnedValues {
   question: string | undefined;
   questionNo: number;
   isFetching: boolean;
+  selected: string;
 }
 
 interface ReturnedFunctions {
@@ -40,7 +41,7 @@ function useGame(): [ReturnedValues, ReturnedFunctions] {
   let animation = useAnimationManager();
   let [lives, setLives] = useState(config.mode.normal.maxLives);
   let [score, setScore] = useState(0);
-  let [answer, setAnswer] = useState('');
+  let [selected, setSelected] = useState('');
   let [current, setCurrent] = useState<Current | null>(null);
 
   const saveNext = useCallback(async () => {
@@ -59,7 +60,7 @@ function useGame(): [ReturnedValues, ReturnedFunctions] {
           text: i,
           isAnswer: null,
           id,
-          onChange: () => setAnswer(i),
+          onChange: () => setSelected(i),
         })),
     });
   }, [next]);
@@ -104,12 +105,15 @@ function useGame(): [ReturnedValues, ReturnedFunctions] {
   async function submit(e: FormEvent) {
     e.preventDefault();
     reaveal();
-    if (answer === current?.correct) {
+    if (selected === current?.correct) {
       await animation.fireAnimation(Events.CORRECT);
       await saveNext();
+      setSelected('');
     } else {
       setLives(lives - 1);
-      animation.fireAnimation(Events.INCORRECT);
+      await animation.fireAnimation(Events.INCORRECT);
+      await saveNext();
+      setSelected('');
     }
   }
 
@@ -130,6 +134,7 @@ function useGame(): [ReturnedValues, ReturnedFunctions] {
     answers: current?.answers as Current['answers'],
     question: current?.question,
     questionNo: current?.current as number,
+    selected,
   }, {
     timeUp: () => {},
     submit,

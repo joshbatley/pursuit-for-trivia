@@ -10,7 +10,7 @@ import Button from 'components/Button';
 
 const GameScene: React.FC = () => {
   let [{
-    lives, score, answers, question, questionNo, isFetching,
+    lives, score, answers, question, questionNo, isFetching, selected,
   }, {
     timeUp, submit,
   }] = useGame();
@@ -33,6 +33,7 @@ const GameScene: React.FC = () => {
                 key={i}
                 onChange={a.onChange}
                 isAnswer={a.isAnswer}
+                selected={selected}
               />
             ))}
           </Flex>

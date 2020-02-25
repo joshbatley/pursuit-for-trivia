@@ -36,7 +36,7 @@ export const AnimationManagerProvider: React.FC<Props> = ({ children }: Props) =
       setTimeout(() => {
         setAnimation(null);
         res();
-      }, 500);
+      }, 2000);
     });
   }
 

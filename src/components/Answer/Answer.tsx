@@ -9,12 +9,13 @@ interface Props {
   name?: string;
   onChange: (e: string) => void;
   isAnswer?: boolean | null;
+  selected: string;
 }
 
 const formatId = (id: string | number) => `button-${id}`;
 
 const Answer: React.FC<Props> = ({
-  text, id, name = 'answer', onChange, isAnswer,
+  text, id, name = 'answer', onChange, isAnswer, selected,
 }: Props) => (
   <div
     className={classname(
@@ -22,7 +23,7 @@ const Answer: React.FC<Props> = ({
       (isAnswer != null && (isAnswer ? styles.correct : styles.incorrect)),
     )}
   >
-    <input type="radio" name={name} id={formatId(id)} className={styles.checkbox} value={text} onChange={({ target }) => onChange(target.value)} />
+    <input type="radio" name={name} id={formatId(id)} className={styles.checkbox} value={text} onChange={({ target }) => onChange(target.value)} checked={selected === text} />
     <label className={styles.label} htmlFor={formatId(id)}>
       {text}
       <Checkmark className={styles.icon} />
