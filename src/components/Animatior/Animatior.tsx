@@ -56,6 +56,13 @@ const Animatior: React.FC<Props> = ({ event }: Props) => {
     if (event === Events.INCORRECT) {
       fire(['#e84545', '#88304e']);
     }
+    if (event === Events.GAMEOVER) {
+      fire(['#e84545', '#88304e']);
+      fire(['#e84545', '#88304e']);
+      fire(['#e84545', '#88304e']);
+      fire(['#e84545', '#88304e']);
+    }
+
   }, [event]);
 
   return (

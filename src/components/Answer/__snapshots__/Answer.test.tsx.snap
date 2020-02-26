@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Answer component matches snapshot 1`] = `
+<div
+  class="container"
+>
+  <input
+    checked=""
+    class="checkbox"
+    id="button-1"
+    name="answer"
+    type="radio"
+    value="123"
+  />
+  <label
+    class="label"
+    for="button-1"
+  >
+    123
+    <svg
+      class="icon"
+    >
+      checkmark.svg
+    </svg>
+  </label>
+</div>
+`;
+
+exports[`Answer component matches snapshot 2`] = `
+<div
+  class="container"
+>
+  <input
+    class="checkbox"
+    id="button-1"
+    name="answer"
+    type="radio"
+    value="123"
+  />
+  <label
+    class="label"
+    for="button-1"
+  >
+    123
+    <svg
+      class="icon"
+    >
+      checkmark.svg
+    </svg>
+  </label>
+</div>
+`;

@@ -7,7 +7,8 @@ interface Props {
 
 export enum Events {
   'CORRECT',
-  'INCORRECT'
+  'INCORRECT',
+  'GAMEOVER'
 }
 
 interface AnimationManager {

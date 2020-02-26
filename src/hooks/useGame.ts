@@ -1,10 +1,12 @@
-import {
-  useState, useCallback, useEffect, FormEvent,
+import React, {
+  useState, useCallback, useEffect, useRef,
 } from 'react';
 import config from 'config';
+import { useHistory } from 'react-router-dom';
 import { shuffle } from 'utils';
 import { useQuestionManager } from 'contexts/QuestionManager';
 import { useAnimationManager, Events } from 'contexts/AnimationManager';
+import scoreCalc from 'utils/scoreCalc';
 
 interface Answer {
   text: string;
@@ -32,7 +34,8 @@ interface ReturnedValues {
 
 interface ReturnedFunctions {
   timeUp: () => void;
-  submit: (e: FormEvent<Element>) => void;
+  reset: (resetFn: () => void) => void;
+  submit: (e: React.FormEvent<Element>) => Promise<void>;
 }
 
 function useGame(): [ReturnedValues, ReturnedFunctions] {
@@ -42,9 +45,11 @@ function useGame(): [ReturnedValues, ReturnedFunctions] {
   let [lives, setLives] = useState(config.mode.normal.maxLives);
   let [score, setScore] = useState(0);
   let [selected, setSelected] = useState('');
+  let resetTimer = useRef<Function | null>(null);
   let [current, setCurrent] = useState<Current | null>(null);
+  let { push } = useHistory();
 
-  const saveNext = useCallback(async () => {
+  const getNextQuestion = useCallback(async () => {
     let nextQuestion = await next();
     setCurrent({
       current: nextQuestion.current,
@@ -65,32 +70,9 @@ function useGame(): [ReturnedValues, ReturnedFunctions] {
     });
   }, [next]);
 
-  // let loseLife = (): void => setLives(lives - 1);
-  // let resetLife = (): void => setLives(maxLives);
-
-  // let resetGame = (): void => {
-  //   resetLife();
-  // };
-
-  // let timesUp = async (): Promise<void> => {
-  //   loseLife();
-  //   // Times up animation
-  //   // reveal answers
-  //   // next question
-  // };
-
-  // let correct = async (): Promise<void> => {
-  //   // Fire confetti
-  //   // reveal answers
-  //   // next question
-  // };
-
-  // let incorrect = async (): Promise<void> => {
-  //   loseLife();
-  //   // Dunce animation
-  //   // reveal answers
-  //   // next question
-  // };
+  function reset(resetFn: () => void) {
+    resetTimer.current = resetFn;
+  }
 
   function reaveal() {
     setCurrent(({
@@ -102,30 +84,56 @@ function useGame(): [ReturnedValues, ReturnedFunctions] {
     }) as Current);
   }
 
-  async function submit(e: FormEvent) {
-    e.preventDefault();
+  async function correct(): Promise<void> {
+    let resartTimer = resetTimer?.current?.();
     reaveal();
+    await animation.fireAnimation(Events.CORRECT);
+    await getNextQuestion();
+    setSelected('');
+    const timeLeft = resartTimer();
+    setScore(score + scoreCalc(timeLeft, 1));
+  }
+
+  async function incorrect(): Promise<void> {
+    let resartTimer = resetTimer?.current?.();
+    reaveal();
+    setLives(lives - 1);
+    await animation.fireAnimation(Events.INCORRECT);
+    if (lives === 0) {
+      animation.fireAnimation(Events.GAMEOVER);
+      return push('/game-over');
+    }
+    await getNextQuestion();
+    setSelected('');
+    resartTimer();
+  }
+
+  async function timeUp(): Promise<void> {
     if (selected === current?.correct) {
-      await animation.fireAnimation(Events.CORRECT);
-      await saveNext();
-      setSelected('');
+      await correct();
     } else {
-      setLives(lives - 1);
-      await animation.fireAnimation(Events.INCORRECT);
-      await saveNext();
-      setSelected('');
+      await incorrect();
+    }
+  }
+
+  async function submit(e: React.FormEvent) {
+    e.preventDefault();
+    if (selected === current?.correct) {
+      await correct();
+    } else {
+      await incorrect();
     }
   }
 
   useEffect(() => {
     async function startGame() {
-      await saveNext();
+      await getNextQuestion();
     }
 
     if (current == null && error == null && isFetching === false) {
       startGame();
     }
-  }, [current, error, saveNext, isFetching]);
+  }, [current, error, getNextQuestion, isFetching]);
 
   return [{
     lives,
@@ -136,8 +144,9 @@ function useGame(): [ReturnedValues, ReturnedFunctions] {
     questionNo: current?.current as number,
     selected,
   }, {
-    timeUp: () => {},
+    timeUp,
     submit,
+    reset,
   }];
 }
 

@@ -2,20 +2,16 @@ import scoreCalc from '../scoreCalc';
 
 describe('scoreCalc', () => {
   test('returns the correct calc as list in comments below', () => {
-    // (timeLeft * difficulty) * (correctMultiplier) * 10
-    // (10 * 0.2) * (1) * 10 = 20
-    expect(scoreCalc(10, 1, 1)).toBe(20);
+    expect(scoreCalc(10, 1)).toBe(200);
   });
   test('doesntly return a negative value', () => {
-    expect(scoreCalc(-10, 1, 1)).toBe(0);
+    expect(scoreCalc(-10, 1)).toBe(0);
   });
   test('if difficulty doesnt exist throw error', () => {
-    expect(() => scoreCalc(10, 4, 1)).toThrow();
-    expect(() => scoreCalc(10, 4, 1)).toThrowError('difficulty out of range');
+    expect(() => scoreCalc(10, 4)).toThrow();
+    expect(() => scoreCalc(10, 4)).toThrowError('difficulty out of range');
   });
   test('returns a number with 0dp(remebering floating point maths & flooring)', () => {
-    // (18 * 0.3) * (4) * 10 = 216 <- (normal maths)
-    // (18 * 0.3) * (4) * 10 = 215.999... <- (floating point math)
-    expect(scoreCalc(18, 2, 4)).toBe(215);
+    expect(scoreCalc(18, 2)).toBe(540);
   });
 });

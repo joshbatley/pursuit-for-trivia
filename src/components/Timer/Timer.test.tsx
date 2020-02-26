@@ -1,8 +1,18 @@
 import React from 'react';
-import { render, waitForDomChange, wait } from '@testing-library/react';
+import {
+  render, waitForDomChange, wait, act,
+} from '@testing-library/react';
 import Component from './Timer';
 
 describe('Timer component', () => {
+  beforeAll(() => {
+    jest.clearAllMocks();
+  });
+  test('matches snapshot', async () => {
+    const { container } = render(<Component />);
+    expect(container.firstChild).toMatchSnapshot();
+  });
+
   test('should render and count down', async () => {
     const { getByText } = render(<Component />);
     expect(getByText('30')).toBeInTheDocument();
@@ -16,6 +26,22 @@ describe('Timer component', () => {
     expect(mockFn).toHaveBeenCalledTimes(0);
     await wait(() => {
       expect(mockFn).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  test('should fire cb, then then resetTimer can reset', async () => {
+    let toBeCalled = () => {};
+    const mockFn = jest.fn((reset) => { toBeCalled = jest.fn(reset); });
+    const cbFn = jest.fn();
+    render(<Component maxTime={1} cb={cbFn} resetTimer={mockFn} />);
+    expect(mockFn).toHaveBeenCalledTimes(1);
+    expect(mockFn).toBeCalledWith(expect.any(Function));
+    await wait(() => {
+      expect(cbFn).toHaveBeenCalledTimes(1);
+    });
+    act(() => {
+      toBeCalled();
+      expect(toBeCalled).toHaveBeenCalledTimes(1);
     });
   });
 });

@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Timer component matches snapshot 1`] = `
+<div
+  class="container"
+>
+  <svg
+    class="timer"
+    height="75"
+    viewBox="0 150 250 75"
+    width="150"
+  >
+    <circle
+      class="timer__background"
+      cx="125"
+      cy="125"
+      r="113"
+    />
+    <circle
+      class="timer__left"
+      cx="125"
+      cy="125"
+      r="113"
+    />
+  </svg>
+  <div
+    class="time"
+  >
+    30
+  </div>
+</div>
+`;

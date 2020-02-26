@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import useGame from 'hooks/useGame';
 import Header from 'components/Header';
 import Heading from 'components/Heading';
@@ -13,14 +13,13 @@ const GameScene: React.FC = () => {
   let [{
     lives, score, answers, question, questionNo, isFetching, selected,
   }, {
-    timeUp, submit,
+    timeUp, submit, reset,
   }] = useGame();
-
   return (
     <>
       { isFetching ? (<Loader />) : (
         <>
-          <Header lives={lives} score={score} />
+          <Header lives={lives} score={score} timeUp={timeUp} reset={reset} />
           <Grid gutter="75px 25px 0" template="35% 40% 20%">
             <Flex style={{ alignSelf: 'self-start' }}>
               <Heading>QUESTION {questionNo + 1}</Heading>

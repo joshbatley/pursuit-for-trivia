@@ -7,13 +7,16 @@ import styles from './styles.module.css';
 interface Props {
   lives: number;
   timeUp?: () => void;
+  reset: (resetFn: () => void) => void;
   score: number;
 }
 
-const Header: React.FC<Props> = ({ lives, timeUp, score }: Props) => (
+const Header: React.FC<Props> = ({
+  lives, timeUp, score, reset,
+}: Props) => (
   <header className={styles.header}>
     <Score score={score} />
-    <Timer cb={timeUp} />
+    <Timer cb={timeUp} resetTimer={reset} />
     <Lives lives={lives} />
   </header>
 );
