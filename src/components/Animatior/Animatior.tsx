@@ -62,7 +62,6 @@ const Animatior: React.FC<Props> = ({ event }: Props) => {
       fire(['#e84545', '#88304e']);
       fire(['#e84545', '#88304e']);
     }
-
   }, [event]);
 
   return (
