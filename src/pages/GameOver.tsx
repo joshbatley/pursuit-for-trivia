@@ -11,7 +11,7 @@ const GameOver: React.FC = () => {
   return (
     <Grid template="70% auto">
       <PageTitle>GAME OVER</PageTitle>
-      <PageTitle>score: {score}</PageTitle>
+      <PageTitle>SCORE: {score}</PageTitle>
       <Flex>
         <Button to="/mode-selector">Resart</Button>
       </Flex>

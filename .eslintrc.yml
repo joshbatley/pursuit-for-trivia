@@ -26,6 +26,7 @@ rules:
   react/button-has-type: 0
   react-hooks/exhaustive-deps: 1
   import/prefer-default-export: 0
+  "@typescript-eslint/no-explicit-any": 0
   "@typescript-eslint/explicit-function-return-type": 0
   jsx-a11y/label-has-associated-control:
     - 2

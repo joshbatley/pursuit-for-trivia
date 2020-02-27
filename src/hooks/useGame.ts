@@ -3,11 +3,12 @@ import React, {
 } from 'react';
 import config from 'config';
 import { useHistory } from 'react-router-dom';
-import { shuffle } from 'utils';
 import { useQuestionManager } from 'contexts/QuestionManager';
+import { useCategoryManager } from 'contexts/CategoryManager';
 import { useAnimationManager, Events } from 'contexts/AnimationManager';
 import scoreCalc from 'utils/scoreCalc';
-import useHighscore from './useHighscore';
+import { shuffle } from 'utils';
+import useHighscore from 'hooks/useHighscore';
 
 interface Answer {
   text: string;
@@ -20,6 +21,7 @@ interface Current {
   current: number;
   question: string;
   correct: string;
+  difficulty: string;
   answers: Answer[];
 }
 
@@ -41,6 +43,7 @@ interface ReturnedFunctions {
 
 function useGame(): [ReturnedValues, ReturnedFunctions] {
   let { next, error, isFetching } = useQuestionManager();
+  let { difficulty } = useCategoryManager();
   let [, set] = useHighscore();
   let animation = useAnimationManager();
   let [lives, setLives] = useState(config.mode.normal.maxLives);
@@ -49,12 +52,14 @@ function useGame(): [ReturnedValues, ReturnedFunctions] {
   let resetTimer = useRef<Function | null>(null);
   let [current, setCurrent] = useState<Current | null>(null);
   let { push } = useHistory();
+  let difficultyLevel = config.mode.normal.difficulties.indexOf(difficulty as string);
 
   const getNextQuestion = useCallback(async () => {
     let nextQuestion = await next();
     setCurrent({
       current: nextQuestion.current,
       question: window.atob(nextQuestion.question),
+      difficulty: window.atob(nextQuestion.difficulty),
       correct: window.atob(nextQuestion.correct_answer),
       answers: [
         nextQuestion.correct_answer,
@@ -92,7 +97,7 @@ function useGame(): [ReturnedValues, ReturnedFunctions] {
     await getNextQuestion();
     setSelected('');
     const timeLeft = resartTimer();
-    setScore(score + scoreCalc(timeLeft, 1));
+    setScore(score + scoreCalc(timeLeft, difficultyLevel));
   }
 
   async function incorrect(): Promise<void> {

@@ -13,7 +13,7 @@ describe('API', () => {
   test('fetchQuestions', () => {
     api.fetchQuestions({ });
     expect(request).toHaveBeenCalledTimes(1);
-    expect(request).toHaveBeenCalledWith(`${config.api.questionURL}?type=multiple&encode=base64&difficulty=medium&amount=50`);
+    expect(request).toHaveBeenCalledWith(`${config.api.questionURL}?type=multiple&encode=base64&amount=50`);
   });
   test('fetchCategories', () => {
     api.fetchCategories();

@@ -1,0 +1,106 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Page ModeSelector matches snapshot 1`] = `
+<section
+  class="grid"
+  style="grid-template-rows: 10% 40% 40% 10%; padding: 25px;"
+>
+  <h1
+    class="h1"
+  >
+    Set up
+  </h1>
+  <div
+    class="flex"
+  >
+    <h3
+      class="container"
+    >
+      How to play
+    </h3>
+    <span
+      class="text"
+    >
+      
+          You get 10 seconds to answer a question, the quicker you are the more pointes you.
+
+          If you're wrong, you lose a life and lose all 3 lives then GAME OVER.
+          
+    </span>
+  </div>
+  <div
+    class="flex"
+  >
+    <label
+      class="label"
+    >
+      Category
+      <select
+        class="select"
+        data-testid="dropdown"
+      >
+        <option
+          disabled=""
+          selected=""
+          value="Symbol(selected)"
+        >
+          Category
+        </option>
+        <option
+          value=""
+        >
+          Any
+        </option>
+      </select>
+    </label>
+    <label
+      class="label"
+    >
+      Difficulty
+      <select
+        class="select"
+        data-testid="dropdown"
+      >
+        <option
+          disabled=""
+          selected=""
+          value="Symbol(selected)"
+        >
+          Difficulty
+        </option>
+        <option
+          value=""
+        >
+          Any
+        </option>
+        <option
+          value="easy"
+        >
+          easy
+        </option>
+        <option
+          value="medium"
+        >
+          medium
+        </option>
+        <option
+          value="hard"
+        >
+          hard
+        </option>
+      </select>
+    </label>
+  </div>
+  <a
+    class="link"
+    href="/game/normal"
+  >
+    <button
+      class="box"
+      type="button"
+    >
+      Play
+    </button>
+  </a>
+</section>
+`;

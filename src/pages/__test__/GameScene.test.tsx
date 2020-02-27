@@ -24,4 +24,8 @@ describe('Page GameScene', () => {
     const { container } = render(<Component />);
     expect(container.firstChild).not.toBe(null);
   });
+  test('matches snapshot', async () => {
+    const { container } = render(<Component />);
+    expect(container.firstChild).toMatchSnapshot();
+  });
 });

@@ -10,11 +10,15 @@ import Flex from 'components/Flex';
 import config from 'config';
 
 const ModeSelector: React.FC = () => {
-  let { categories, setCategory } = useCategoryManager();
-  let { difficulty } = config.mode.normal;
+  let { categories, setCategory, setDifficulty } = useCategoryManager();
+  let { difficulties } = config.mode.normal;
 
-  function onChange(value: string) {
+  function categoryChange(value: string) {
     setCategory(parseInt(value, 10));
+  }
+
+  function difficultyChange(value: string) {
+    setDifficulty(value === '' ? undefined : value as QuestionDifficulty);
   }
 
   return (
@@ -22,18 +26,16 @@ const ModeSelector: React.FC = () => {
       <PageTitle>Set up</PageTitle>
       <Flex>
         <Heading>How to play</Heading>
-        <Text>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mae
-          cenas cursus justo nec lorem ornare malesuada. Nullam aliquet dic
-          tum imperdiet. Nullam at mi eu orci rutrum auctor ac vel augue. P
-          raesent sed nunc neque. Mauris vestibulum quam non tortor rhonc
-          us mollis. Pellentesque habitant morbi tristique senectus et net
-          us et malesuada fames ac turpis egestas. Maecenas sed efficitur mauris.
+        <Text>{`
+          You get ${config.mode.normal.maxTime.toString()} seconds to answer a question, the quicker you are the more pointes you.
+
+          If you're wrong, you lose a life and lose all 3 lives then GAME OVER.
+          `}
         </Text>
       </Flex>
       <Flex>
-        <Dropdown options={categories} onChange={onChange} placeholder="Category" />
-        <Dropdown options={difficulty} onChange={onChange} placeholder="Difficulty" />
+        <Dropdown options={categories} onChange={categoryChange} placeholder="Category" />
+        <Dropdown options={difficulties} onChange={difficultyChange} placeholder="Difficulty" />
       </Flex>
       <Button to="/game/normal">
         Play

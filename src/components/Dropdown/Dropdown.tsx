@@ -23,6 +23,7 @@ const Dropdown: React.FC<Props> = ({ options, placeholder, onChange = () => { } 
       defaultValue={v}
     >
       {placeholder && (<option value={v} disabled>{placeholder}</option>)}
+      <option value="">Any</option>
       {options && options?.map((o: Option, idx: number) => (isObj(o) ? (
         <option key={o.id} value={o.id}>{o.name}</option>
       ) : (

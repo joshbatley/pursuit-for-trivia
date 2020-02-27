@@ -13,6 +13,8 @@ interface CategoryManager {
   categories: CategoriesArray | null | undefined;
   selected: number | null;
   setCategory: React.Dispatch<number>;
+  difficulty: QuestionDifficulty | undefined;
+  setDifficulty: React.Dispatch<QuestionDifficulty | undefined>;
 }
 
 let ls = new LS(config.lsKeys.categories);
@@ -32,6 +34,7 @@ export function useCategoryManager(): CategoryManager {
 export const CategoryManagerProvider: React.FC<Props> = ({ children }: Props) => {
   let [categories, setCategories] = useState<CategoriesArray | null | undefined>(undefined);
   let [selected, setSelected] = useState<number | null>(null);
+  let [difficulty, setDifficulty] = useState<QuestionDifficulty | undefined>(undefined);
 
   useEffect(() => {
     async function loadCategories() {
@@ -57,6 +60,8 @@ export const CategoryManagerProvider: React.FC<Props> = ({ children }: Props) =>
     categories,
     selected,
     setCategory: setSelected,
+    difficulty,
+    setDifficulty,
   };
 
   return (

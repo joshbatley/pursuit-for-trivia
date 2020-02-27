@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Page Start matches snapshot 1`] = `
+<section
+  class="grid"
+  style="grid-template-rows: 70% auto;"
+>
+  <h1
+    class="h1"
+  >
+    GAME OVER
+  </h1>
+  <h1
+    class="h1"
+  >
+    SCORE: 
+  </h1>
+  <div
+    class="flex"
+  >
+    <a
+      class="link"
+      href="/mode-selector"
+    >
+      <button
+        class="box"
+        type="button"
+      >
+        Resart
+      </button>
+    </a>
+  </div>
+</section>
+`;

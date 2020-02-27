@@ -1,20 +1,16 @@
-import config, { isDev } from 'config';
+import config from 'config';
 import request from 'utils/request';
 import { parseObjToQueryStr } from 'utils';
-import questions from '__mocks__/question.json';
 
 async function fetchQuestions({
   category,
   type = 'multiple',
   encode = 'base64',
-  difficulty = 'medium',
+  difficulty,
 }: FetchQuestionsArgs): Promise<Question[] | null> {
   let questString = parseObjToQueryStr({
     category, type, encode, difficulty, amount: 50,
   });
-  if (isDev) {
-    return questions.results;
-  }
   try {
     let data = await request<QuestionsData>(`${config.api.questionURL}${questString}`);
     return data?.results ?? [];

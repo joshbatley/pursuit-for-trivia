@@ -8,4 +8,8 @@ describe('Page Start', () => {
     const { getByText } = render(<Router><Component /></Router>);
     expect(getByText(/game over/i)).toBeInTheDocument();
   });
+  test('matches snapshot', async () => {
+    const { container } = render(<Router><Component /></Router>);
+    expect(container.firstChild).toMatchSnapshot();
+  });
 });

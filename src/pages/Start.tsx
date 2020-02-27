@@ -11,7 +11,7 @@ const Start: React.FC = () => {
   return (
     <Grid template="70% auto">
       <Logo />
-      <PageTitle>Highscore: {score ?? 0}</PageTitle>
+      <PageTitle>HIGHSCORE: {score ?? 0}</PageTitle>
       <Flex>
         <Button to="/mode-selector">Start</Button>
       </Flex>

@@ -24,4 +24,8 @@ describe('Page ModeSelector', () => {
     const { getByText } = render(<Component />);
     expect(getByText(/set up/i)).toBeInTheDocument();
   });
+  test('matches snapshot', async () => {
+    const { container } = render(<Component />);
+    expect(container.firstChild).toMatchSnapshot();
+  });
 });

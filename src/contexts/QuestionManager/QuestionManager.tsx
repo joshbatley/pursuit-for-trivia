@@ -36,7 +36,7 @@ export const QuestionManagerProvider: React.FC<Props> = ({ children }: Props) =>
   let questions = useRef<Question[]>([]);
   let error = useRef<Error | null>(null);
   let [isLoading, setLoading] = useState(false);
-  let { selected } = useCategoryManager();
+  let { selected, difficulty } = useCategoryManager();
 
   let fetch = useCallback(async (): Promise<void> => {
     if (questions == null || questions.current.length > 0 || isLoading === true) {
@@ -44,7 +44,7 @@ export const QuestionManagerProvider: React.FC<Props> = ({ children }: Props) =>
     }
     try {
       setLoading(true);
-      let nextSet = await fetchQuestions({ category: selected });
+      let nextSet = await fetchQuestions({ category: selected, difficulty });
       if (!isNullOrUndefined(nextSet)) {
         questions.current = [...questions.current, ...nextSet as Question[]];
       }
@@ -53,7 +53,7 @@ export const QuestionManagerProvider: React.FC<Props> = ({ children }: Props) =>
     } finally {
       setLoading(false);
     }
-  }, [selected, isLoading]);
+  }, [selected, isLoading, difficulty]);
 
   async function next(): Promise<Question & {current: number}> {
     if (isEmptyArray(questions.current)) {
