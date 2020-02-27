@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './styles.module.css';
 
 interface Props {
-  children: React.ReactChild;
+  children: React.ReactChild | React.ReactText[];
 }
 
 const PageTitle: React.FC<Props> = ({ children }: Props) => (

@@ -7,6 +7,7 @@ import { shuffle } from 'utils';
 import { useQuestionManager } from 'contexts/QuestionManager';
 import { useAnimationManager, Events } from 'contexts/AnimationManager';
 import scoreCalc from 'utils/scoreCalc';
+import useHighscore from './useHighscore';
 
 interface Answer {
   text: string;
@@ -39,8 +40,8 @@ interface ReturnedFunctions {
 }
 
 function useGame(): [ReturnedValues, ReturnedFunctions] {
-  // TOOD: Load from params and storage
   let { next, error, isFetching } = useQuestionManager();
+  let [, set] = useHighscore();
   let animation = useAnimationManager();
   let [lives, setLives] = useState(config.mode.normal.maxLives);
   let [score, setScore] = useState(0);
@@ -99,8 +100,9 @@ function useGame(): [ReturnedValues, ReturnedFunctions] {
     reaveal();
     setLives(lives - 1);
     await animation.fireAnimation(Events.INCORRECT);
-    if (lives === 0) {
+    if (lives === 1) {
       animation.fireAnimation(Events.GAMEOVER);
+      set(score);
       return push('/game-over');
     }
     await getNextQuestion();

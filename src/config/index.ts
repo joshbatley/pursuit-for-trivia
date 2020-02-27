@@ -29,7 +29,7 @@ const config: Config = {
   mode: {
     [Modes.Normal]: {
       maxLives: 3,
-      maxTime: 30,
+      maxTime: 10,
       difficulty: ['Easy', 'Medium', 'Hard'],
     },
   },

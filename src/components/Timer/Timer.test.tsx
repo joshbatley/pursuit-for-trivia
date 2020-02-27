@@ -2,6 +2,7 @@ import React from 'react';
 import {
   render, waitForDomChange, wait, act,
 } from '@testing-library/react';
+import config from 'config';
 import Component from './Timer';
 
 describe('Timer component', () => {
@@ -14,10 +15,11 @@ describe('Timer component', () => {
   });
 
   test('should render and count down', async () => {
+    config.mode.normal.maxTime = 3;
     const { getByText } = render(<Component />);
-    expect(getByText('30')).toBeInTheDocument();
+    expect(getByText('3')).toBeInTheDocument();
     await waitForDomChange();
-    expect(getByText('29')).toBeInTheDocument();
+    expect(getByText('2')).toBeInTheDocument();
   });
 
   test('should fire callback when timer reach 0', async () => {

@@ -7,6 +7,23 @@ interface Props {
   event: Events | null;
 }
 
+const downfallInside = {
+  particleCount: 100,
+  startVelocity: 5,
+  angle: -90,
+  spread: 360,
+  ticks: 300,
+  origin: {
+    y: -0.3,
+  },
+};
+
+const downfallOutside = {
+  ...downfallInside,
+  particleCount: 500,
+  startVelocity: 20,
+};
+
 const leftCannon = {
   particleCount: 500,
   angle: 60,
@@ -17,9 +34,8 @@ const leftCannon = {
 };
 
 const rightCannon = {
-  particleCount: 500,
+  ...leftCannon,
   angle: 120,
-  spread: 55,
   origin: {
     x: 1,
   },
@@ -38,13 +54,13 @@ const Animatior: React.FC<Props> = ({ event }: Props) => {
   });
 
   useEffect(() => {
-    function fire(colors: string[]) {
+    function fire(colors: string[], style = 'cannons') {
       conf.current?.({
-        ...leftCannon,
+        ...(style === 'cannons' ? leftCannon : downfallInside),
         colors,
       });
       conf.current?.({
-        ...rightCannon,
+        ...(style === 'cannons' ? rightCannon : downfallOutside),
         colors,
       });
     }
@@ -54,13 +70,10 @@ const Animatior: React.FC<Props> = ({ event }: Props) => {
     }
 
     if (event === Events.INCORRECT) {
-      fire(['#e84545', '#88304e']);
+      fire(['#e84545', '#88304e'], 'downfall');
     }
     if (event === Events.GAMEOVER) {
-      fire(['#e84545', '#88304e']);
-      fire(['#e84545', '#88304e']);
-      fire(['#e84545', '#88304e']);
-      fire(['#e84545', '#88304e']);
+      fire(['#e84545', '#88304e'], 'downfall');
     }
   }, [event]);
 
